@@ -3,7 +3,7 @@
     <transition name="modal" @close="showModal = false">
       <div class="modal-mask">
         <div class="modal-wrapper">
-          <div class="modal-container">
+
             <div class="modal-body">
               <slot name="body">
 
@@ -18,7 +18,7 @@
                   </div>
                 </div>
               </slot>
-            </div>
+
           </div>
         </div>
       </div>

@@ -38684,74 +38684,70 @@ var render = function() {
         [
           _c("div", { staticClass: "modal-mask" }, [
             _c("div", { staticClass: "modal-wrapper" }, [
-              _c("div", { staticClass: "modal-container" }, [
-                _c(
-                  "div",
-                  { staticClass: "modal-body" },
-                  [
-                    _vm._t("body", function() {
-                      return [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "alert alert-danger alert-dismissible fade show",
-                            attrs: { role: "alert" }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "close",
-                                attrs: {
-                                  type: "button",
-                                  "data-dismiss": "modal",
-                                  "aria-label": "Close"
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.$emit("close")
-                                  }
-                                }
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                [
+                  _vm._t("body", function() {
+                    return [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-danger alert-dismissible fade show",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: {
+                                type: "button",
+                                "data-dismiss": "modal",
+                                "aria-label": "Close"
                               },
-                              [
-                                _c(
-                                  "span",
-                                  { attrs: { "aria-hidden": "true" } },
-                                  [_vm._v("×")]
+                              on: {
+                                click: function($event) {
+                                  return _vm.$emit("close")
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.errors, function(v, k) {
+                            return _c(
+                              "div",
+                              { key: k },
+                              _vm._l(v, function(error) {
+                                return _c(
+                                  "p",
+                                  { key: error, staticClass: "text-sm" },
+                                  [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(error) +
+                                        "\n                  "
+                                    )
+                                  ]
                                 )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.errors, function(v, k) {
-                              return _c(
-                                "div",
-                                { key: k },
-                                _vm._l(v, function(error) {
-                                  return _c(
-                                    "p",
-                                    { key: error, staticClass: "text-sm" },
-                                    [
-                                      _vm._v(
-                                        "\n                    " +
-                                          _vm._s(error) +
-                                          "\n                  "
-                                      )
-                                    ]
-                                  )
-                                }),
-                                0
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]
-                    })
-                  ],
-                  2
-                )
-              ])
+                              }),
+                              0
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]
+                  })
+                ],
+                2
+              )
             ])
           ])
         ]
