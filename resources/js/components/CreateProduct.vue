@@ -14,6 +14,7 @@
             <input type="text" class="form-control" v-model="product.detail">
           </div>
           <button type="submit" class="btn btn-primary">Create</button>
+          <router-link :to="{name: 'home'}" class="btn btn-success">Back</router-link>
         </form>
       </div>
     </div>
