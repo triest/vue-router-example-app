@@ -1967,10 +1967,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      product: {}
+      product: {},
+      errors: null
     };
   },
   methods: {
@@ -1982,7 +1993,11 @@ __webpack_require__.r(__webpack_exports__);
           name: 'home'
         });
       })["catch"](function (err) {
-        return console.log(err);
+        console.log(err.response.status);
+
+        if (err.response.status === 422) {
+          _this.errors = err.response.data.errors;
+        }
       })["finally"](function () {
         return _this.loading = false;
       });
@@ -38051,6 +38066,40 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "form-group" }, [
+              _vm.errors
+                ? _c("div", [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "alert alert-danger alert-dismissible fade show",
+                        attrs: { role: "alert" }
+                      },
+                      _vm._l(_vm.errors, function(v, k) {
+                        return _c(
+                          "div",
+                          { key: k },
+                          _vm._l(v, function(error) {
+                            return _c(
+                              "p",
+                              { key: error, staticClass: "text-sm" },
+                              [
+                                _vm._v(
+                                  "\n                  " +
+                                    _vm._s(error) +
+                                    "\n                "
+                                )
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
               _c("label", [_vm._v("Name")]),
               _vm._v(" "),
               _c("input", {

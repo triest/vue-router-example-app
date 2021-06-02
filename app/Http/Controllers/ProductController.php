@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Http\Requests\CreateProductRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -11,7 +12,7 @@ class ProductController extends Controller
         return array_reverse($products);
     }
 
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         $product = new Product([
                                        'name' => $request->input('name'),
