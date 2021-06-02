@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Requests\CreateProductRequest;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -29,9 +30,12 @@ class ProductController extends Controller
         return response()->json($product);
     }
 
-    public function update($id, Request $request)
+    public function update($id, CreateProductRequest $request)
     {
         $product = Product::find($id);
+        if(!$product){
+            return response()->json(['message'=>"Product not found"]);
+        }
         $product->update($request->all());
 
         return response()->json('Product updated!');

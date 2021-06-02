@@ -29,7 +29,10 @@
 </template>
 
 <script>
+
+import ErrorsModal from "./ErrorsModal"; ErrorsModal;
 export default {
+
     data() {
         return {
             products: []
@@ -44,6 +47,10 @@ export default {
     },
     methods: {
         deleteProduct(id) {
+           let  result = window.confirm("Delete product?");
+           if(!result){
+               return ;
+           }
             this.axios
                 .delete(`/api/products/${id}`)
                 .then(response => {
