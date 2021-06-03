@@ -19,7 +19,7 @@ Auth::routes();
 Route::get('/',[HomeController::class,'index']);
 
 Route::get('/app', function () {
-    return view('app');
+    return view('layouts.app');
 })->middleware('auth');
 
 

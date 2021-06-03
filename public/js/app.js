@@ -1878,9 +1878,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.axios.post('/logout').then(function (response) {
-        return _this.$router.push({
-          name: 'home'
-        });
+        return (// this.$router.push({name: 'home'})
+          window.location.href = "/"
+        );
       })["catch"](function (err) {
         if (err.response.status === 422) {
           _this.errors = err.response.data.errors;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRegistrationRequest;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,9 +15,12 @@ class RegisterController extends Controller
 {
 
 
+    public function showRegistrationForm(){
+        return view('auth.register');
+    }
 
 
-    public function register (Request $request)
+    public function register (UserRegistrationRequest $request)
     {
         $user = new User();
         $user->name = $request->name;

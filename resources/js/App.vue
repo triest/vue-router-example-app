@@ -35,7 +35,8 @@ export default {
             this.axios
                 .post('/logout')
                 .then(response => (
-                    this.$router.push({name: 'home'})
+                   // this.$router.push({name: 'home'})
+                    window.location.href = "/"
                 ))
                 .catch(err => {
                     if (err.response.status === 422) {
