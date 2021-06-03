@@ -5,6 +5,7 @@
         <div class="navbar-nav">
           <router-link to="/" class="nav-item nav-link">Products List</router-link>
           <router-link to="/create" class="nav-item nav-link">Create Product</router-link>
+          <button v-on:click="logout()">Logout</button>
         </div>
       </div>
     </nav>
@@ -14,5 +15,35 @@
 </template>
 
 <script>
-export default {}
+import ErrorsModal from "./components/ErrorsModal";
+
+export default {
+    components:{
+        ErrorsModal
+    },
+    data() {
+        return {
+
+        }
+    },
+
+    methods: {
+        clouseModal(){
+            console.log("clouse")
+        },
+        logout() {
+            this.axios
+                .post('/logout')
+                .then(response => (
+                    this.$router.push({name: 'home'})
+                ))
+                .catch(err => {
+                    if (err.response.status === 422) {
+                        this.errors = err.response.data.errors;
+                    }
+                })
+                .finally(() => this.loading = false)
+        }
+    }
+}
 </script>
