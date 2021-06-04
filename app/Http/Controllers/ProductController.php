@@ -13,7 +13,7 @@ class ProductController extends Controller
         return array_reverse($products);
     }
 
-    public function store(CreateProductRequest $request)
+    public function store(Request $request)
     {
         $product = new Product([
                                        'name' => $request->input('name'),

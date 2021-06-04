@@ -2,18 +2,10 @@
   <div>
     <h3 class="text-center">Edit Product</h3>
     <div class="row">
+      <errors-modal v-if="errors" :errors="errors"  @close="errors=null"></errors-modal>
       <div class="col-md-6">
         <form @submit.prevent="updateProduct">
           <div class="form-group">
-            <div v-if="errors">
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <div v-for="(v, k) in errors" :key="k">
-                  <p v-for="error in v" :key="error" class="text-sm">
-                    {{ error }}
-                  </p>
-                </div>
-              </div>
-            </div>
             <label>Name</label>
             <input type="text" class="form-control" v-model="product.name">
           </div>
@@ -30,7 +22,11 @@
 </template>
 
 <script>
+import ErrorsModal from "./ErrorsModal";
 export default {
+    components:{
+        ErrorsModal
+    },
     data() {
         return {
             product: {},

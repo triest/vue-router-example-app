@@ -25,6 +25,7 @@ class CreateProductRequest extends FormRequest
     {
         return [
                 'name' => ['required', 'string', 'max:255', 'min:2'],
+                'detail' => ['required', 'string', 'max:255', 'min:2'],
 
         ];
     }
