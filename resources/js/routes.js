@@ -3,6 +3,7 @@ import CreateProduct from './components/CreateProduct.vue';
 import EditProduct from './components/EditProduct.vue';
 import Register from './components/Auth/Register.vue';
 import Vue from 'vue'
+import Profile from "./components/Auth/Profile";
 
 Vue.component('app', require('./App.vue').default);
 
@@ -27,5 +28,10 @@ export const routes = [
         name:'register',
         path: '/register',
         component: Register
+    },
+    {
+        name:'profile',
+        path: '/profile',
+        component: Profile
     },
 ];

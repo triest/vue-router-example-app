@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,6 @@ Route::middleware('api')->group(function () {
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('settings',  SettingController::class);
+    Route::apiResource('profile',ProfileController::class);
 });
+

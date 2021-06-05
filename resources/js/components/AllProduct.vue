@@ -2,6 +2,7 @@
   <div>
     <h2 class="text-center">Products List</h2>
 
+    <a ></a>
     <table class="table">
       <thead>
       <tr>

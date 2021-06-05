@@ -1,18 +1,13 @@
 <template>
   <form @submit.prevent="saveForm" novalidate>
-    <errors-modal v-if="errors" :errors="errors" @close="errors=null"></errors-modal>
+    <errors-modal v-if="errors" :errors="errors"  @close="errors=null"></errors-modal>
     <div class="form-group">
       <label for="exampleInputEmail1">Name</label>
       <input type="email" class="form-control" id="naem" aria-describedby="emailHelp"
              placeholder="Name" v-model="form.name">
       <small id="name" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-             placeholder="Enter email" v-model="form.email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-    </div>
+
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
@@ -50,7 +45,7 @@ export default {
         this.axios
             .get(`/api/profile/`)
             .then((res) => {
-                this.product = res.data;
+                this.form = res.data.data;
             });
     },
     methods: {
@@ -58,10 +53,16 @@ export default {
 
         },
         saveForm() {
-            axios.post('/api/register', this.form).then(() => {
-                this.$router.push({name: 'home'})
+            axios.post('/api/profile', this.form).then(() => {
+            //    this.$router.push({name: 'home'})
+                this.form = res.data.data;
+                alert("Сохранено")
             }).catch((error) => {
-                this.errors = error.response.data.errors;
+                if (error.response.status === 422) {
+                    this.errors = error.response.data.errors;
+                }else {
+                    alert("Вутренняя ошибка!")
+                }
             })
         }
     }
