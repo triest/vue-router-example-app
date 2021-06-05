@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function settings(){
         return $this->hasOne(Setting::class);
     }
+
+    public function relation(){
+        return $this->belongsTo(Relations::class);
+    }
 }

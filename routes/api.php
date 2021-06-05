@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingController;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,3 +32,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/main-photo/upload',[ProfileController::class,'uploadMainPhoto']);
 });
 
+Route::get('/test',function (){
+    $user=User::select(['*'])->with('relation')->first();
+        dump($user);
+
+    $relation=\App\Models\Relations::select(['*'])->with('user')->first();
+    dump($relation);
+});
