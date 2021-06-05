@@ -23,7 +23,7 @@ Route::middleware('api')->group(function () {
     Route::post('login', [LoginController::class ,'login']);
 });
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('settings',  SettingController::class);
 });

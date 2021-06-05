@@ -29,6 +29,7 @@ window.axios = require('axios');
 import {store} from './store/index';
 
 const router = new VueRouter({
+    base: '/app',
     mode: 'history',
     routes: routes
 });

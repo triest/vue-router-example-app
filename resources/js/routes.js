@@ -7,6 +7,7 @@ import Vue from 'vue'
 Vue.component('app', require('./App.vue').default);
 
 export const routes = [
+
     {
         name: 'home',
         path: '/',

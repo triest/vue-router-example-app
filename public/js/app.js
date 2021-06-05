@@ -1934,14 +1934,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {};
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['SETTINGS'])),
-  mounted: function mounted() {
-    var item = 'Get groceries';
-    this.$store.dispatch('SAVE_SETTINGS', item);
-    console.log(this.SETTINGS);
-  },
+  mounted: function mounted() {},
   methods: {
     clouseModal: function clouseModal() {
       console.log("clouse");
+    },
+    getSettings: function getSettings() {
+      console.log(this.GET_SETTINGS);
     },
     logout: function logout() {
       var _this = this;
@@ -2019,6 +2018,9 @@ _ErrorsModal__WEBPACK_IMPORTED_MODULE_0__.default;
     this.axios.get('/api/products/').then(function (response) {
       _this.products = response.data;
     });
+  },
+  mounted: function mounted() {
+    console.log("products");
   },
   methods: {
     deleteProduct: function deleteProduct(id) {
@@ -2444,6 +2446,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use(vuex__WEBPACK_IMPORTED_MODULE_1__.d
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__.default({
+  base: '/app',
   mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_5__.routes
 });

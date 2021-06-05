@@ -74,18 +74,19 @@ export default {
     computed : {
 
         ...mapGetters(['SETTINGS']),
-        // Другие вычисляемые свойства
 
     },
     mounted() {
-        let item = 'Get groceries';
-        this.$store.dispatch('SAVE_SETTINGS', item);
-        console.log(this.SETTINGS)
+
     },
 
     methods: {
+
         clouseModal(){
             console.log("clouse")
+        },
+        getSettings(){
+            console.log(this.GET_SETTINGS)
         },
         logout() {
             this.axios

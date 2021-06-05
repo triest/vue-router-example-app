@@ -23,6 +23,7 @@
 </head>
 @auth
     <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Auth</a>
+    <b><a href="{{ url('/logout') }}">Выйти</a></b>
 @else
     <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">not auth</a>
 

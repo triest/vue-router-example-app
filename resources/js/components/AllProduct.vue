@@ -45,6 +45,9 @@ export default {
                 this.products = response.data;
             });
     },
+    mounted() {
+        console.log("products")
+    },
     methods: {
         deleteProduct(id) {
            let  result = window.confirm("Delete product?");
