@@ -68,10 +68,8 @@ export default {
                 this.form = res.data.data;
                 alert("Сохранено")
             }).catch((error) => {
-                if (error.response.status === 422) {
+                if (error.response!==undefined && error.response.status === 422) {
                     this.errors = error.response.data.errors;
-                }else {
-                    alert("Вутренняя ошибка!")
                 }
             })
         },
@@ -92,10 +90,11 @@ export default {
                     }
                 }
             ).then(response => {
-
+                this.errors=null;
+                this.form.photo_url=response.data.photo_url;
             })
-                .catch(err => {
-                    if (err.response.status === 422) {
+                .catch((err) => {
+                    if (err.response!==undefined && err.response.status === 422) {
                         this.errors = err.response.data.errors;
                     }
                 });

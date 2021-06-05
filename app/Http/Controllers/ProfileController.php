@@ -8,6 +8,7 @@ use App\Http\Resources\ProfileResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProfileController extends Controller
@@ -101,14 +102,21 @@ class ProfileController extends Controller
 
 
         if($request->file()) {
+            /*
+             * удаляем старый файл
+             * */
+            if($user->photo_url!=null &&  Storage::disk('public')->exists('public/profile/' .$user->photo_url)) {
+                Storage::disk('public')->delete('public/profile/' . $user->photo_url);
+            }
+
             $fileName = time().'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('profile', $fileName, 'public');
             $name = time().'_'.$request->file->getClientOriginalName();
-            $path = '/storage/' . $filePath;
+
             $user->photo_name=$name;
             $user->photo_url=$filePath;
             $user->save();
-            return response()->json(['result'=>true]);
+            return response()->json(['photo_url'=>$filePath]);
         }
 
         return response()->json(['result'=>true]);

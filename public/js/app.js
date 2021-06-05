@@ -1880,8 +1880,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2084,10 +2082,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.form = res.data.data;
         alert("Сохранено");
       })["catch"](function (error) {
-        if (error.response.status === 422) {
+        if (error.response !== undefined && error.response.status === 422) {
           _this2.errors = error.response.data.errors;
-        } else {
-          alert("Вутренняя ошибка!");
         }
       });
     },
@@ -2106,8 +2102,11 @@ __webpack_require__.r(__webpack_exports__);
         headers: {
           'Content-Type': 'multipart/form-data'
         }
-      }).then(function (response) {})["catch"](function (err) {
-        if (err.response.status === 422) {
+      }).then(function (response) {
+        _this3.errors = null;
+        _this3.form.photo_url = response.data.photo_url;
+      })["catch"](function (err) {
+        if (err.response !== undefined && err.response.status === 422) {
           _this3.errors = err.response.data.errors;
         }
       });
