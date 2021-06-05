@@ -23,6 +23,10 @@ Route::get('/app', function () {
     return view('layouts.app');
 })->middleware('auth');
 
+Route::get('/app/{any}', function () {
+    return view('layouts.app');
+})->middleware('auth');
+
 Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 
 
