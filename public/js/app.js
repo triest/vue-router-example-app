@@ -1897,6 +1897,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getSettings: function getSettings() {
       console.log(this.GET_SETTINGS);
+      console.log(this.$store['SETTINGS']);
     },
     logout: function logout() {
       var _this = this;
@@ -39766,9 +39767,11 @@ var render = function() {
         _vm._v("\n   " + _vm._s(_vm.form.name) + "\n  ")
       ]),
       _vm._v(" "),
-      _c("img", {
-        attrs: { src: "/storage/" + _vm.form.photo_url, height: "150px" }
-      }),
+      _vm.form.photo_url
+        ? _c("img", {
+            attrs: { src: "/storage/" + _vm.form.photo_url, height: "150px" }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
         _c("label", [

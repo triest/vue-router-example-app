@@ -43,6 +43,7 @@ export default {
         },
         getSettings(){
             console.log(this.GET_SETTINGS)
+            console.log(this.$store['SETTINGS'])
         },
         logout() {
             this.axios

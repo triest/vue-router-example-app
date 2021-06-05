@@ -105,8 +105,8 @@ class ProfileController extends Controller
             /*
              * удаляем старый файл
              * */
-            if($user->photo_url!=null &&  Storage::disk('public')->exists('public/profile/' .$user->photo_url)) {
-                Storage::disk('public')->delete('public/profile/' . $user->photo_url);
+            if($user->photo_url!=null &&  Storage::disk('public')->exists($user->photo_url)) {
+                Storage::disk('public')->delete($user->photo_url);
             }
 
             $fileName = time().'_'.$request->file->getClientOriginalName();

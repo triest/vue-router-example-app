@@ -6,7 +6,7 @@
      {{form.name}}
     </div>
 
-    <img :src="'/storage/'+form.photo_url" height="150px">
+    <img v-if="form.photo_url" :src="'/storage/'+form.photo_url" height="150px">
     <div class="large-12 medium-12 small-12 cell">
       <label>Выбирите изображение
         <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
