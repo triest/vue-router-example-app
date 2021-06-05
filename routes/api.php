@@ -24,7 +24,7 @@ Route::middleware('api')->group(function () {
     Route::post('login', [LoginController::class ,'login']);
 });
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('settings',  SettingController::class);
     Route::apiResource('profile',ProfileController::class);
