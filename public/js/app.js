@@ -2046,8 +2046,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -7190,7 +7188,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\nul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    width: 25%;\r\n    background-color: #f1f1f1;\r\n    position: fixed;\r\n    height: 100%;\r\n    overflow: auto;\n}\nli a {\r\n    display: block;\r\n    color: #000;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\n}\nli a.active {\r\n    background-color: #04AA6D;\r\n    color: white;\n}\nli a:hover:not(.active) {\r\n    background-color: #555;\r\n    color: white;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\nul {\r\n    list-style-type: none;\r\n    margin: 0;\r\n    padding: 0;\r\n    width: auto;\r\n    background-color: #f1f1f1;\r\n    position: fixed;\r\n  /*  height: 100%;*/\r\n    margin-top: 5%;\r\n    margin-left: 10%;\r\n    overflow: auto;\n}\nli a {\r\n    display: block;\r\n    color: #000;\r\n    padding: 8px 16px;\r\n    text-decoration: none;\n}\nli a.active {\r\n    background-color: #04AA6D;\r\n    color: white;\n}\nli a:hover:not(.active) {\r\n    background-color: #555;\r\n    color: white;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39765,39 +39763,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Name")]),
-        _vm._v(" "),
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.form.name,
-              expression: "form.name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: {
-            type: "email",
-            id: "naem",
-            "aria-describedby": "emailHelp",
-            placeholder: "Name"
-          },
-          domProps: { value: _vm.form.name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.$set(_vm.form, "name", $event.target.value)
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "small",
-          { staticClass: "form-text text-muted", attrs: { id: "name" } },
-          [_vm._v("We'll never share your email with anyone else.")]
-        )
+        _vm._v("\n   " + _vm._s(_vm.form.name) + "\n  ")
       ]),
       _vm._v(" "),
       _c("img", {
@@ -39827,7 +39793,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Submit")]
+          [_vm._v("Загрузить")]
         )
       ]),
       _vm._v(" "),

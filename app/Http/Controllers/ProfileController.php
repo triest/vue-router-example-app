@@ -36,7 +36,7 @@ class ProfileController extends Controller
     {
         //
         $user=Auth::user();
-        $user->name=$request->name;
+       // $user->name=$request->name;
         if($request->password){
             $user->password = Hash::make($request->password);
         }

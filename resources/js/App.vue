@@ -66,10 +66,12 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 25%;
+    width: auto;
     background-color: #f1f1f1;
     position: fixed;
-    height: 100%;
+  /*  height: 100%;*/
+    margin-top: 5%;
+    margin-left: 10%;
     overflow: auto;
 }
 

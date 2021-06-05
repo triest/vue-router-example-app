@@ -3,9 +3,7 @@
     <errors-modal v-if="errors" :errors="errors"  @close="errors=null"></errors-modal>
     <div class="form-group">
       <label for="exampleInputEmail1">Name</label>
-      <input type="email" class="form-control" id="naem" aria-describedby="emailHelp"
-             placeholder="Name" v-model="form.name">
-      <small id="name" class="form-text text-muted">We'll never share your email with anyone else.</small>
+     {{form.name}}
     </div>
 
     <img :src="'/storage/'+form.photo_url" height="150px">
@@ -13,7 +11,7 @@
       <label>Выбирите изображение
         <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
       </label>
-      <button v-on:click="submitFile()">Submit</button>
+      <button v-on:click="submitFile()">Загрузить</button>
     </div>
 
 
