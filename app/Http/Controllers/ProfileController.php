@@ -109,7 +109,7 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->photo_url);
             }
 
-            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $fileName = time().'_'.$user->id.'_'.$request->file->getClientOriginalName();
             $filePath = $request->file('file')->storeAs('profile', $fileName, 'public');
             $name = time().'_'.$request->file->getClientOriginalName();
 
