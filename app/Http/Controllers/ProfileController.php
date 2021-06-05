@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\ProfileResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -89,4 +91,27 @@ class ProfileController extends Controller
     {
         //
     }
+
+    public function uploadMainPhoto(PhotoRequest $request){
+
+        $imageName = time().'.'.$request->file->extension();
+
+        $user=Auth::user();
+
+
+
+        if($request->file()) {
+            $fileName = time().'_'.$request->file->getClientOriginalName();
+            $filePath = $request->file('file')->storeAs('profile', $fileName, 'public');
+            $name = time().'_'.$request->file->getClientOriginalName();
+            $path = '/storage/' . $filePath;
+            $user->photo_name=$name;
+            $user->photo_url=$filePath;
+            $user->save();
+            return response()->json(['result'=>true]);
+        }
+
+        return response()->json(['result'=>true]);
+    }
+
 }

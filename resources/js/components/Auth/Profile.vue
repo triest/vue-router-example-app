@@ -8,6 +8,15 @@
       <small id="name" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
 
+    <img :src="'/storage/'+form.photo_url" height="150px">
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Выбирите изображение
+        <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
+      </label>
+      <button v-on:click="submitFile()">Submit</button>
+    </div>
+
+
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
@@ -36,7 +45,8 @@ export default {
                 name: '',
                 email: '',
                 password: '',
-                password_confirmation: ''
+                password_confirmation: '',
+                mainFile: '',
             },
             errors: null
         }
@@ -64,7 +74,33 @@ export default {
                     alert("Вутренняя ошибка!")
                 }
             })
-        }
+        },
+        handleFileMainUpload() {
+            this.mainFile = this.$refs.mainFileInput.files[0];
+        },
+        submitFile() {
+            /*
+                    Initialize the form data
+                */
+            let formData = new FormData();
+            formData.append('file', this.mainFile);
+            axios.post('/api/profile/main-photo/upload',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            ).then(response => {
+
+            })
+                .catch(err => {
+                    if (err.response.status === 422) {
+                        this.errors = err.response.data.errors;
+                    }
+                });
+
+        },
     }
 }
 </script>

@@ -2041,6 +2041,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2052,7 +2061,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        mainFile: ''
       },
       errors: null
     };
@@ -2078,6 +2088,27 @@ __webpack_require__.r(__webpack_exports__);
           _this2.errors = error.response.data.errors;
         } else {
           alert("Вутренняя ошибка!");
+        }
+      });
+    },
+    handleFileMainUpload: function handleFileMainUpload() {
+      this.mainFile = this.$refs.mainFileInput.files[0];
+    },
+    submitFile: function submitFile() {
+      var _this3 = this;
+
+      /*
+              Initialize the form data
+          */
+      var formData = new FormData();
+      formData.append('file', this.mainFile);
+      axios.post('/api/profile/main-photo/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {})["catch"](function (err) {
+        if (err.response.status === 422) {
+          _this3.errors = err.response.data.errors;
         }
       });
     }
@@ -39767,6 +39798,37 @@ var render = function() {
           "small",
           { staticClass: "form-text text-muted", attrs: { id: "name" } },
           [_vm._v("We'll never share your email with anyone else.")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("img", {
+        attrs: { src: "/storage/" + _vm.form.photo_url, height: "150px" }
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c("label", [
+          _vm._v("Выбирите изображение\n      "),
+          _c("input", {
+            ref: "mainFileInput",
+            attrs: { type: "file", id: "file" },
+            on: {
+              change: function($event) {
+                return _vm.handleFileMainUpload()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.submitFile()
+              }
+            }
+          },
+          [_vm._v("Submit")]
         )
       ]),
       _vm._v(" "),

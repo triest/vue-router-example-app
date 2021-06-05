@@ -28,5 +28,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('products', ProductController::class);
     Route::resource('settings',  SettingController::class);
     Route::apiResource('profile',ProfileController::class);
+    Route::post('/profile/main-photo/upload',[ProfileController::class,'uploadMainPhoto']);
 });
 
