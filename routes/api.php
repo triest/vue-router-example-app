@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SettingController;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,12 +26,17 @@ Route::middleware('api')->group(function () {
     Route::post('login', [LoginController::class ,'login']);
 });
 
-Route::middleware('auth')->group(function () {
-    Route::resource('products', ProductController::class);
-    Route::resource('settings',  SettingController::class);
-    Route::apiResource('profile',ProfileController::class);
-    Route::post('/profile/main-photo/upload',[ProfileController::class,'uploadMainPhoto']);
-});
+Route::middleware('auth')->group(
+        function () {
+            Route::resource('products', ProductController::class);
+            Route::resource('settings', SettingController::class);
+            Route::apiResource('profile', ProfileController::class);
+            Route::apiResource('search', SearchController::class);
+            Route::post('/profile/main-photo/upload', [ProfileController::class, 'uploadMainPhoto']);
+        }
+);
+
+
 
 Route::get('/test',function (){
     $user=User::select(['*'])->with('relation')->first();

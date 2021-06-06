@@ -4,6 +4,7 @@ import EditProduct from './components/EditProduct.vue';
 import Register from './components/Auth/Register.vue';
 import Vue from 'vue'
 import Profile from "./components/Auth/Profile";
+import Dating from "./components/Dating";
 
 Vue.component('app', require('./App.vue').default);
 
@@ -33,5 +34,10 @@ export const routes = [
         name:'profile',
         path: '/profile',
         component: Profile
+    },
+    {
+        name:'dating',
+        path: '/dating',
+        component: Dating
     },
 ];
