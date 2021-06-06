@@ -39885,10 +39885,9 @@ var render = function() {
                     expression: "form.target_id"
                   }
                 ],
-                attrs: { type: "checkbox", id: "targets" },
+                attrs: { type: "checkbox", id: "targets" + item.id },
                 domProps: {
                   value: item.id,
-                  checked: true,
                   checked: Array.isArray(_vm.form.target_id)
                     ? _vm._i(_vm.form.target_id, item.id) > -1
                     : _vm.form.target_id
@@ -39919,7 +39918,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("label", { attrs: { for: "relation" } }, [
+              _c("label", { attrs: { for: "targets" + item.id } }, [
                 _vm._v(_vm._s(item.name))
               ])
             ])

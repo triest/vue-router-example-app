@@ -50,7 +50,7 @@ class User extends Authenticatable
     }
 
     public function target(){
-         return $this->belongsToMany(Target::class,'user_target');
+         return $this->belongsToMany(Target::class,'user_target')->withTimestamps();
     }
 
 }

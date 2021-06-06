@@ -28,8 +28,8 @@
     <label> Моя цель:
       <span v-for="item in targets">
            <br>
-           <input type="checkbox" id="targets" :value="item.id" v-model="form.target_id" :checked="true">
-           <label for="relation" >{{ item.name }}</label>
+           <input type="checkbox" :id="'targets'+item.id" :value="item.id" v-model="form.target_id" >
+           <label :for="'targets'+item.id" >{{ item.name }}</label>
          </span>
     </label>
 
