@@ -48,4 +48,9 @@ class User extends Authenticatable
     public function relation(){
         return $this->belongsTo(Relations::class);
     }
+
+    public function target(){
+         return $this->belongsToMany(Target::class,'user_target');
+    }
+
 }

@@ -2,8 +2,7 @@
   <form @submit.prevent="saveForm" novalidate>
     <errors-modal v-if="errors" :errors="errors" @close="errors=null"></errors-modal>
     <div class="form-group">
-      <label for="exampleInputEmail1">Name</label>
-      {{ form.name }}
+      <label for="exampleInputEmail1">      {{ form.name }}</label>
     </div>
 
     <img v-if="form.photo_url" :src="'/storage/'+form.photo_url" height="150px">
@@ -20,25 +19,32 @@
            <br>
            <input type="radio" id="relation" :value="item.id" v-model="form.relation_id">
            <label for="relation">{{ item.name }}</label>
-
          </span>
       </label>
-
     </div>
 
 
+
+    <label> Моя цель:
+      <span v-for="item in targets">
+           <br>
+           <input type="checkbox" id="targets" :value="item.id" v-model="form.target_id" :checked="true">
+           <label for="relation" >{{ item.name }}</label>
+         </span>
+    </label>
+
     <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
+      <label for="exampleInputPassword1">Пароль</label>
       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"
              v-model="form.password">
     </div>
     <div class="form-group">
-      <label for="password_confirmation">Password confirmation</label>
+      <label for="password_confirmation">Подтверждение пароля</label>
       <input type="password" class="form-control" id="password_confirmation" placeholder="Password"
              v-model="form.password_confirmation">
     </div>
     <div class="p-2 w-full mt-4">
-      <button type="submit" class="btn btn-primary">Create</button>
+      <button type="submit" class="btn btn-primary">Сохранить</button>
     </div>
   </form>
 </template>
@@ -59,6 +65,7 @@ export default {
                 mainFile: '',
             },
             relations: [],
+            targets:[],
             errors: null
         }
     },
@@ -68,6 +75,12 @@ export default {
             .then((res) => {
                 this.form = res.data.data.profile;
                 this.relations = res.data.data.relations;
+                this.targets=res.data.data.targets;
+                this.form.target_id=[]
+                for (let i=0;i<res.data.data.profile.target.length;i++){
+                      this.form.target_id.push(res.data.data.profile.target[i].id)
+                }
+
             });
     },
     methods: {

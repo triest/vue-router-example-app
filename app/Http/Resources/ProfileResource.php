@@ -18,6 +18,7 @@ class ProfileResource extends JsonResource
         $profile=parent::toArray($request);
 
         return ['profile'=>$profile,
-                'relations'=>Relations::all()];
+                'relations'=>Relations::all(),
+                'targets'=>Relations::all()];
     }
 }

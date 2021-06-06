@@ -2059,6 +2059,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2074,6 +2080,7 @@ __webpack_require__.r(__webpack_exports__);
         mainFile: ''
       },
       relations: [],
+      targets: [],
       errors: null
     };
   },
@@ -2083,6 +2090,12 @@ __webpack_require__.r(__webpack_exports__);
     this.axios.get("/api/profile/").then(function (res) {
       _this.form = res.data.data.profile;
       _this.relations = res.data.data.relations;
+      _this.targets = res.data.data.targets;
+      _this.form.target_id = [];
+
+      for (var i = 0; i < res.data.data.profile.target.length; i++) {
+        _this.form.target_id.push(res.data.data.profile.target[i].id);
+      }
     });
   },
   methods: {
@@ -39587,7 +39600,7 @@ var render = function() {
         "li",
         [
           _c("router-link", { attrs: { to: { name: "profile" } } }, [
-            _vm._v("Profile")
+            _vm._v("Профиль")
           ])
         ],
         1
@@ -39777,8 +39790,9 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Name")]),
-        _vm._v("\n    " + _vm._s(_vm.form.name) + "\n  ")
+        _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+          _vm._v("      " + _vm._s(_vm.form.name))
+        ])
       ]),
       _vm._v(" "),
       _vm.form.photo_url
@@ -39854,9 +39868,69 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      _c(
+        "label",
+        [
+          _vm._v(" Моя цель:\n    "),
+          _vm._l(_vm.targets, function(item) {
+            return _c("span", [
+              _c("br"),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.target_id,
+                    expression: "form.target_id"
+                  }
+                ],
+                attrs: { type: "checkbox", id: "targets" },
+                domProps: {
+                  value: item.id,
+                  checked: true,
+                  checked: Array.isArray(_vm.form.target_id)
+                    ? _vm._i(_vm.form.target_id, item.id) > -1
+                    : _vm.form.target_id
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.form.target_id,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = item.id,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 &&
+                          _vm.$set(_vm.form, "target_id", $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          _vm.$set(
+                            _vm.form,
+                            "target_id",
+                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                          )
+                      }
+                    } else {
+                      _vm.$set(_vm.form, "target_id", $$c)
+                    }
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("label", { attrs: { for: "relation" } }, [
+                _vm._v(_vm._s(item.name))
+              ])
+            ])
+          })
+        ],
+        2
+      ),
+      _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "exampleInputPassword1" } }, [
-          _vm._v("Password")
+          _vm._v("Пароль")
         ]),
         _vm._v(" "),
         _c("input", {
@@ -39888,7 +39962,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "password_confirmation" } }, [
-          _vm._v("Password confirmation")
+          _vm._v("Подтверждение пароля")
         ]),
         _vm._v(" "),
         _c("input", {
@@ -39932,7 +40006,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-        [_vm._v("Create")]
+        [_vm._v("Сохранить")]
       )
     ])
   }
