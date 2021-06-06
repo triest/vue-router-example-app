@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\ProfileResource;
+use App\Models\Target;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,8 +45,20 @@ class ProfileController extends Controller
         if($request->password){
             $user->password = Hash::make($request->password);
         }
+
         $user->fill($request->toArray());
         $user->save();
+
+        $user->target()->detach();
+        if ($request->has('target_id')) {
+            foreach ($request->target_id as $item) {
+                $target = Target::select(['id', 'name'])->where('id', $item)
+                        ->first();
+                if ($target != null) {
+                    $user->target()->attach($target);
+                }
+            }
+        }
 
         return new ProfileResource($user);
     }

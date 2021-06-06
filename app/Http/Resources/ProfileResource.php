@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Relations;
+use App\Models\Target;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
@@ -19,6 +20,6 @@ class ProfileResource extends JsonResource
 
         return ['profile'=>$profile,
                 'relations'=>Relations::all(),
-                'targets'=>Relations::all()];
+                'targets'=>Target::all()];
     }
 }
