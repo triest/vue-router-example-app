@@ -2047,6 +2047,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2061,6 +2073,7 @@ __webpack_require__.r(__webpack_exports__);
         password_confirmation: '',
         mainFile: ''
       },
+      relations: [],
       errors: null
     };
   },
@@ -2068,7 +2081,8 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     this.axios.get("/api/profile/").then(function (res) {
-      _this.form = res.data.data;
+      _this.form = res.data.data.profile;
+      _this.relations = res.data.data.relations;
     });
   },
   methods: {
@@ -39764,7 +39778,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "exampleInputEmail1" } }, [_vm._v("Name")]),
-        _vm._v("\n   " + _vm._s(_vm.form.name) + "\n  ")
+        _vm._v("\n    " + _vm._s(_vm.form.name) + "\n  ")
       ]),
       _vm._v(" "),
       _vm.form.photo_url
@@ -39797,6 +39811,46 @@ var render = function() {
             }
           },
           [_vm._v("Загрузить")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v("Отношения:\n      "),
+            _vm._l(_vm.relations, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.relation_id,
+                      expression: "form.relation_id"
+                    }
+                  ],
+                  attrs: { type: "radio", id: "relation" },
+                  domProps: {
+                    value: item.id,
+                    checked: _vm._q(_vm.form.relation_id, item.id)
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "relation_id", item.id)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "relation" } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
         )
       ]),
       _vm._v(" "),

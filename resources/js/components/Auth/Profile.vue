@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="saveForm" novalidate>
-    <errors-modal v-if="errors" :errors="errors"  @close="errors=null"></errors-modal>
+    <errors-modal v-if="errors" :errors="errors" @close="errors=null"></errors-modal>
     <div class="form-group">
       <label for="exampleInputEmail1">Name</label>
-     {{form.name}}
+      {{ form.name }}
     </div>
 
     <img v-if="form.photo_url" :src="'/storage/'+form.photo_url" height="150px">
@@ -12,6 +12,18 @@
         <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
       </label>
       <button v-on:click="submitFile()">Загрузить</button>
+    </div>
+
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Отношения:
+        <span v-for="item in relations">
+           <br>
+           <input type="radio" id="relation" :value="item.id" v-model="form.relation_id">
+           <label for="relation">{{ item.name }}</label>
+
+         </span>
+      </label>
+
     </div>
 
 
@@ -46,6 +58,7 @@ export default {
                 password_confirmation: '',
                 mainFile: '',
             },
+            relations: [],
             errors: null
         }
     },
@@ -53,20 +66,21 @@ export default {
         this.axios
             .get(`/api/profile/`)
             .then((res) => {
-                this.form = res.data.data;
+                this.form = res.data.data.profile;
+                this.relations = res.data.data.relations;
             });
     },
     methods: {
-        getProfile(){
+        getProfile() {
 
         },
         saveForm() {
             axios.post('/api/profile', this.form).then(() => {
-            //    this.$router.push({name: 'home'})
+                //    this.$router.push({name: 'home'})
                 this.form = res.data.data;
                 alert("Сохранено")
             }).catch((error) => {
-                if (error.response!==undefined && error.response.status === 422) {
+                if (error.response !== undefined && error.response.status === 422) {
                     this.errors = error.response.data.errors;
                 }
             })
@@ -88,11 +102,11 @@ export default {
                     }
                 }
             ).then(response => {
-                this.errors=null;
-                this.form.photo_url=response.data.photo_url;
+                this.errors = null;
+                this.form.photo_url = response.data.photo_url;
             })
                 .catch((err) => {
-                    if (err.response!==undefined && err.response.status === 422) {
+                    if (err.response !== undefined && err.response.status === 422) {
                         this.errors = err.response.data.errors;
                     }
                 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Relations;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
@@ -14,6 +15,9 @@ class ProfileResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        $profile=parent::toArray($request);
+
+        return ['profile'=>$profile,
+                'relations'=>Relations::all()];
     }
 }

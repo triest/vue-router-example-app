@@ -40,7 +40,7 @@ class ProfileController extends Controller
         if($request->password){
             $user->password = Hash::make($request->password);
         }
-
+        $user->fill($request->toArray());
         $user->save();
 
         return new ProfileResource($user);
