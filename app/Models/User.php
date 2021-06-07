@@ -49,8 +49,26 @@ class User extends Authenticatable
         return $this->belongsTo(Relations::class);
     }
 
-    public function target(){
-         return $this->belongsToMany(Target::class,'user_target')->withTimestamps();
+    public function target()
+    {
+        return $this->belongsToMany(Target::class, 'user_target')->withTimestamps();
+    }
+
+    public function interest()
+    {
+        return $this->belongsToMany(
+                Interest::class
+        );
+    }
+
+    public function sex(){
+        return $this->hasOne(Sex::class);
+    }
+
+
+    public function seachsettings()
+    {
+        return $this->hasOne(SearchSettings::class);
     }
 
 }

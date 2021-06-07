@@ -2408,7 +2408,7 @@ __webpack_require__.r(__webpack_exports__);
     seach: function seach() {
       var _this = this;
 
-      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'api/anket/search';
+      var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/api/search';
       this.anketList = [];
       axios.get(url).then(function (response) {
         var data = response.data;
@@ -2443,7 +2443,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       console.log(this.page);
-      axios.get('api/anket/search', {
+      axios.get('/api/anket/search', {
         params: {
           page: this.page
         }
@@ -40140,13 +40140,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("a", { attrs: { href: /anket/ + _vm.user.id } }, [
+    _c("a", { attrs: { href: "anket/" + _vm.user.unique_id } }, [
       _vm.user.online === true
         ? _c("div", { staticClass: "cell-online" }, [_vm._m(0)])
         : _vm._e(),
       _vm._v(" "),
       _c("img", {
-        attrs: { width: "250", height: "250", src: _vm.user.photo_profile_url }
+        attrs: { width: "250", height: "250", src: _vm.user.photo_url }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "cell" }, [
@@ -40308,7 +40308,11 @@ var render = function() {
                     expression: "form.target_id"
                   }
                 ],
-                attrs: { type: "checkbox", id: "targets" + item.id },
+                attrs: {
+                  type: "checkbox",
+                  id: "targets" + item.id,
+                  name: "targets" + item.id
+                },
                 domProps: {
                   value: item.id,
                   checked: Array.isArray(_vm.form.target_id)

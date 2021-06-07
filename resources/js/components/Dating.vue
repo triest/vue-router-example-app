@@ -65,7 +65,7 @@ export default {
     components: {AnketShortView},
     methods: {
 
-        seach(url = 'api/anket/search') {
+        seach(url = '/api/search') {
             this.anketList = [];
             axios.get(url).then((response) => {
                 let data = response.data;
@@ -97,7 +97,7 @@ export default {
         },
         loadNew: function () {
             console.log(this.page);
-            axios.get('api/anket/search',
+            axios.get('/api/anket/search',
                 {
                     params:
                         {

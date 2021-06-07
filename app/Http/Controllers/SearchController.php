@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\AnketSearchResourse;
+use App\Service\SearchService;
 use Illuminate\Http\Request;
 
 class SearchController extends Controller
@@ -9,11 +11,15 @@ class SearchController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
         //
+
+        $searchService=new SearchService();
+        $result=$searchService->search();
+        return AnketSearchResourse::collection($result);
     }
 
     /**

@@ -10,7 +10,7 @@
       <label>Выбирите изображение
         <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
       </label>
-      <button v-on:click="submitFile()">Загрузить</button>
+      <button v-on:click="submitFile()" >Загрузить</button>
     </div>
 
     <div class="large-12 medium-12 small-12 cell">
@@ -28,7 +28,7 @@
     <label> Моя цель:
       <span v-for="item in targets">
            <br>
-           <input type="checkbox" :id="'targets'+item.id" :value="item.id" v-model="form.target_id" >
+           <input type="checkbox" :id="'targets'+item.id" :name="'targets'+item.id" :value="item.id" v-model="form.target_id" >
            <label :for="'targets'+item.id" >{{ item.name }}</label>
          </span>
     </label>
