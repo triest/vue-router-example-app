@@ -6,7 +6,7 @@
       <li><a href="#contact">Contact</a></li>
       <li><a href="#about">About</a></li>
     </ul>
-    <button class="btn btn-primary" v-on:click="example()"></button>
+    <button class="btn btn-primary" v-on:click="example()">Example</button>
 
     <div style="margin-left:30%;padding:1px 16px;height:1000px;">
       <router-view></router-view>
@@ -35,15 +35,17 @@ export default {
                   return this.$store.getters.get_settings
               },
               set:function (newValue){
-                  this.$store.getters.get_settings=newValue;
+                  this.$store.dispatch('SAVE_SETTINGS',newValue)
               }
           },
     },
     mounted() {
         this.$store.dispatch('GET_SETTINGS')
+        this.$store.dispatch('SAVE_SETTINGS')
     },
 
     methods: {
+        ...mapActions('SAVE_SETTINGS'),
         example(){
             console.log("example");
          //   console.log(this.getSettings);
@@ -52,6 +54,14 @@ export default {
             console.log(this.getSettings['color']);
             console.log(this.getSettings['user_id']);
 
+        //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
+            this.getSettings={ 'color': 'green'}
+            this.getSettings={ 'id': 3}
+            this.getSettings={ 'user_id': 2}
+
+            console.log(this.getSettings['id']);
+            console.log(this.getSettings['color']);
+            console.log(this.getSettings['user_id']);
 
         },
         logout() {
@@ -67,7 +77,8 @@ export default {
                     }
                 })
                 .finally(() => this.loading = false)
-        }
+        },
+
     }
 }
 </script>
