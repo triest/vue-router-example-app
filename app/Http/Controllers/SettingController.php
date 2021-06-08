@@ -43,7 +43,15 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         //
-        dump($request);
+        dump($request->post());
+        $user=Auth::user();
+        $settings=$user->settings()->first();
+
+        foreach ($request->post() as $key=>$value){
+       //     dump($value);
+            $settings->$key=$value;
+        }
+        $settings->save();
     }
 
     /**
@@ -55,6 +63,9 @@ class SettingController extends Controller
     public function show(Setting $setting)
     {
         //
+
+
+
     }
 
     /**

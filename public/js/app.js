@@ -1911,9 +1911,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.getSettings = {
         'user_id': 2
       };
-      console.log(this.getSettings['id']);
-      console.log(this.getSettings['color']);
-      console.log(this.getSettings['user_id']);
     },
     logout: function logout() {
       var _this = this;

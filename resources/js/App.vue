@@ -59,9 +59,7 @@ export default {
             this.getSettings={ 'id': 3}
             this.getSettings={ 'user_id': 2}
 
-            console.log(this.getSettings['id']);
-            console.log(this.getSettings['color']);
-            console.log(this.getSettings['user_id']);
+
 
         },
         logout() {
