@@ -6,29 +6,31 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        settings:null,
+        settings:[],
     },
     getters: {
-        SETTINGS: state => {
+        get_settings(state){
             return state.settings;
         },
     },
     mutations: {
-        SET_SETTINGS: (state, payload) => {
-            state.settings = payload;
-        },
-
-        ADD_SETTINGS: (state, payload) => {
-            state.settings.push(payload);
-        },
+        settings(state,data) {
+            return state.settings = data
+        }
     },
     actions: {
-        GET_SETTINGS: async (context, payload) => {
-            let {data} = await axios.get('api/settings');
-            context.commit('SET_SETTINGS', data);
+        GET_SETTINGS(context){
+            axios.get("api/settings")
+                .then((response)=>{
+                    context.commit("settings",response.data.settings) //categories will be run from mutation
+                })
+                .catch(()=>{
+                    console.log("Error........")
+                })
         },
 
-        SAVE_SETTINGS: async (context, payload) => {
+
+        async  SAVE_SETTINGS (context, payload) {
             let {data} = await axios.post('api/settings');
             context.commit('ADD_SETTINGS', payload);
         },

@@ -12,15 +12,15 @@ class SettingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
         $user=Auth::user();
 
+       $settings=$user->settings()->first();
 
-
-        return $user->settings()->first();
+        return response()->json(['settings'=>$settings],200);
     }
 
     /**

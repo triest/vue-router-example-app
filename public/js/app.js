@@ -1857,29 +1857,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_ErrorsModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ErrorsModal */ "./resources/js/components/ErrorsModal.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -1889,15 +1884,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(['SETTINGS'])),
-  mounted: function mounted() {},
+  computed: {
+    getSettings: {
+      get: function get() {
+        return this.$store.getters.get_settings;
+      },
+      set: function set(newValue) {
+        this.$store.getters.get_settings = newValue;
+      }
+    }
+  },
+  mounted: function mounted() {
+    this.$store.dispatch('GET_SETTINGS');
+  },
   methods: {
-    clouseModal: function clouseModal() {
-      console.log("clouse");
-    },
-    getSettings: function getSettings() {
-      console.log(this.GET_SETTINGS);
-      console.log(this.$store['SETTINGS']);
+    example: function example() {
+      console.log("example"); //   console.log(this.getSettings);
+
+      console.log(this.getSettings['id']);
+      console.log(this.getSettings['color']);
+      console.log(this.getSettings['user_id']);
     },
     logout: function logout() {
       var _this = this;
@@ -2861,37 +2867,41 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default);
 var store = new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
   state: {
-    settings: null
+    settings: []
   },
   getters: {
-    SETTINGS: function SETTINGS(state) {
+    get_settings: function get_settings(state) {
       return state.settings;
     }
   },
   mutations: {
-    SET_SETTINGS: function SET_SETTINGS(state, payload) {
-      state.settings = payload;
-    },
-    ADD_SETTINGS: function ADD_SETTINGS(state, payload) {
-      state.settings.push(payload);
+    settings: function settings(state, data) {
+      return state.settings = data;
     }
   },
   actions: {
-    GET_SETTINGS: function () {
-      var _GET_SETTINGS = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(context, payload) {
-        var _yield$axios$get, data;
+    GET_SETTINGS: function GET_SETTINGS(context) {
+      axios.get("api/settings").then(function (response) {
+        context.commit("settings", response.data.settings); //categories will be run from mutation
+      })["catch"](function () {
+        console.log("Error........");
+      });
+    },
+    SAVE_SETTINGS: function SAVE_SETTINGS(context, payload) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var _yield$axios$post, data;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return axios.get('api/settings');
+                return axios.post('api/settings');
 
               case 2:
-                _yield$axios$get = _context.sent;
-                data = _yield$axios$get.data;
-                context.commit('SET_SETTINGS', data);
+                _yield$axios$post = _context.sent;
+                data = _yield$axios$post.data;
+                context.commit('ADD_SETTINGS', payload);
 
               case 5:
               case "end":
@@ -2899,44 +2909,8 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
             }
           }
         }, _callee);
-      }));
-
-      function GET_SETTINGS(_x, _x2) {
-        return _GET_SETTINGS.apply(this, arguments);
-      }
-
-      return GET_SETTINGS;
-    }(),
-    SAVE_SETTINGS: function () {
-      var _SAVE_SETTINGS = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(context, payload) {
-        var _yield$axios$post, data;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.next = 2;
-                return axios.post('api/settings');
-
-              case 2:
-                _yield$axios$post = _context2.sent;
-                data = _yield$axios$post.data;
-                context.commit('ADD_SETTINGS', payload);
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function SAVE_SETTINGS(_x3, _x4) {
-        return _SAVE_SETTINGS.apply(this, arguments);
-      }
-
-      return SAVE_SETTINGS;
-    }()
+      }))();
+    }
   }
 });
 
@@ -39991,6 +39965,15 @@ var render = function() {
       _vm._v(" "),
       _vm._m(1)
     ]),
+    _vm._v(" "),
+    _c("button", {
+      staticClass: "btn btn-primary",
+      on: {
+        click: function($event) {
+          return _vm.example()
+        }
+      }
+    }),
     _vm._v(" "),
     _c(
       "div",

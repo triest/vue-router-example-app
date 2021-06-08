@@ -6,6 +6,7 @@
       <li><a href="#contact">Contact</a></li>
       <li><a href="#about">About</a></li>
     </ul>
+    <button class="btn btn-primary" v-on:click="example()"></button>
 
     <div style="margin-left:30%;padding:1px 16px;height:1000px;">
       <router-view></router-view>
@@ -17,6 +18,7 @@
 <script>
 import ErrorsModal from "./components/ErrorsModal";
 import {mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 
 export default {
     components:{
@@ -28,22 +30,29 @@ export default {
         }
     },
     computed : {
-
-        ...mapGetters(['SETTINGS']),
-
+          getSettings: {
+              get: function () {
+                  return this.$store.getters.get_settings
+              },
+              set:function (newValue){
+                  this.$store.getters.get_settings=newValue;
+              }
+          },
     },
     mounted() {
-
+        this.$store.dispatch('GET_SETTINGS')
     },
 
     methods: {
+        example(){
+            console.log("example");
+         //   console.log(this.getSettings);
 
-        clouseModal(){
-            console.log("clouse")
-        },
-        getSettings(){
-            console.log(this.GET_SETTINGS)
-            console.log(this.$store['SETTINGS'])
+            console.log(this.getSettings['id']);
+            console.log(this.getSettings['color']);
+            console.log(this.getSettings['user_id']);
+
+
         },
         logout() {
             this.axios
