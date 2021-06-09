@@ -5,6 +5,7 @@ import Register from './components/Auth/Register.vue';
 import Vue from 'vue'
 import Profile from "./components/Auth/Profile";
 import Dating from "./components/Dating";
+import Anket from "./components/Anket"
 
 Vue.component('app', require('./App.vue').default);
 
@@ -40,4 +41,9 @@ export const routes = [
         path: '/dating',
         component: Dating
     },
+    {
+        name: 'anket',
+        path: '/anket/:unique_id',
+        component: Anket
+    }
 ];

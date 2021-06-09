@@ -1,6 +1,7 @@
 <template>
   <div>
-    <a :href="'anket/'+user.unique_id">
+    <!--  <router-link :to="{name: 'edit', params: { id: product.id }}" class="btn btn-success">Edit</router-link> -->
+    <router-link :to="{name:'anket',params:{unique_id: user.unique_id}}">
       <div v-if="user.online===true" class="cell-online">
         <div class="cell-online-overflow">
           <span class="online"></span>
@@ -12,7 +13,7 @@
           {{ user.name }}
         </div>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 

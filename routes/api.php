@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ProductController;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(
             Route::apiResource('profile', ProfileController::class);
             Route::apiResource('search', SearchController::class);
             Route::post('/profile/main-photo/upload', [ProfileController::class, 'uploadMainPhoto']);
+            Route::get('/anket/:unique_id',[AnketController::class,'show']);
         }
 );
 
