@@ -22,10 +22,14 @@ Route::get('/',[HomeController::class,'index']);
 Route::get('/app', function () {
     return view('layouts.app');
 })->middleware('auth');
-
+/*
 Route::get('/app/{any}', function () {
     return view('layouts.app');
 })->middleware('auth');
+*/
+Route::get('/app/{any}', function () {
+    return view('layouts.app');
+})->middleware('auth')->where('any', '^(?!api).*$');;
 
 Route::get('/logout', [LoginController::class,'logout'])->name('logout');
 

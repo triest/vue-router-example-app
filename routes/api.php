@@ -34,7 +34,7 @@ Route::middleware('auth')->group(
             Route::apiResource('profile', ProfileController::class);
             Route::apiResource('search', SearchController::class);
             Route::post('/profile/main-photo/upload', [ProfileController::class, 'uploadMainPhoto']);
-            Route::get('/anket/:unique_id',[AnketController::class,'show']);
+            Route::get('/anket/{unique_id}',[AnketController::class,'show']);
         }
 );
 

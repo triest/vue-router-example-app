@@ -2086,7 +2086,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     user: {
       type: Object,
-      required: false
+      required: true
     }
   }
 });
