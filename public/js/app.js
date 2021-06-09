@@ -39366,7 +39366,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("img", {
-        attrs: { width: "250", height: "250", src: _vm.user.photo_url }
+        attrs: { width: "200", height: "200", src: _vm.user.photo_url }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "cell" }, [
@@ -40099,7 +40099,7 @@ var render = function() {
           _vm._l(_vm.anketList, function(item) {
             return _c(
               "div",
-              { staticClass: "card" },
+              { staticClass: "col md-1 sm-3" },
               [_c("anket-short-view", { attrs: { user: item } })],
               1
             )

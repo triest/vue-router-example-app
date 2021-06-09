@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\DB;
 
 class SearchService
 {
-    private $limit = 16;
+    private $limit = 9;
 
-    private $paginate = 16;
+    private $paginate = 9;
 
     public function search()
     {

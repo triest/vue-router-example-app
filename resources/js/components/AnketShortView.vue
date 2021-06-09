@@ -6,7 +6,7 @@
           <span class="online"></span>
         </div>
       </div>
-      <img width="250" height="250" :src="user.photo_url">
+      <img width="200" height="200" :src="user.photo_url">
       <div class="cell">
         <div class="cell-overflow">
           {{ user.name }}

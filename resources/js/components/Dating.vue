@@ -18,7 +18,7 @@
       </div>
       <div class="row">
         <br>
-        <div class="card" v-for="item in anketList">
+        <div class="col md-1 sm-3" v-for="item in anketList">
           <anket-short-view :user="item"></anket-short-view>
         </div>
         <SearchModal class="search-modal" v-if="seachModal" @closeSeachModal="closeSeachModal()"></SearchModal>
