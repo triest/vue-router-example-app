@@ -71,4 +71,14 @@ class User extends Authenticatable
         return $this->hasOne(SearchSettings::class);
     }
 
+    public function iIgnore()
+    {
+        return $this->belongsToMany(User::class,'users_relations','id','who_id',);
+    }
+    public function meIgnore()
+    {
+        return $this->belongsToMany(User::class,'users_relations','target_id','id',);
+    }
+
+
 }

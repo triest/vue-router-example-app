@@ -43,9 +43,9 @@ class SettingController extends Controller
     public function store(Request $request)
     {
         //
-        dump($request->post());
+
         $user=Auth::user();
-        $settings=$user->settings()->first();
+        $settings=$user->settings()->firstOrNew();
 
         foreach ($request->post() as $key=>$value){
        //     dump($value);

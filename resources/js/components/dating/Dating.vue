@@ -38,7 +38,7 @@
 
 <script>
 
-import AnketShortView from "./AnketShortView";
+import AnketShortView from "../AnketShortView";
 
 export default {
 

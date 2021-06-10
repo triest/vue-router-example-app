@@ -126,9 +126,9 @@ class ProfileController extends Controller
                 Storage::disk('public')->delete($user->photo_url);
             }
 
-            $fileName = time().'_'.$user->id.'_'.$request->file->getClientOriginalName();
+            $fileName = time().'_'.$user->id.'_.'.$request->file->getClientOriginalExtension();
             $filePath = $request->file('file')->storeAs('profile', $fileName, 'public');
-            $name = time().'_'.$request->file->getClientOriginalName();
+            $name = time().'_'.$user->id.'_'.rand(0,100).'_.'.$request->file->getClientOriginalExtension();
 
             $user->photo_name=$name;
             $user->photo_url=$filePath;

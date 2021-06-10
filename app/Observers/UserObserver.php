@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Str;
 
@@ -10,21 +11,22 @@ class UserObserver
     /**
      * Handle the User "created" event.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
      * @return void
      */
     public function created(User $user)
     {
         //
-        do
-        {
+        do {
             $randomString = Str::random(25);
-            $user_code = User::select(['id'])->where('unique_id', $randomString)->first();
-        }
-        while($user_code);
+        } while (User::where('unique_id', '=', $randomString)->exists());
 
-        $user->unique_id=$randomString;
+        $user->unique_id = $randomString;
         $user->save();
+
+        $settings = new Setting();
+        $settings->save();
+        $user->settings()->save($settings);
     }
 
     /**
