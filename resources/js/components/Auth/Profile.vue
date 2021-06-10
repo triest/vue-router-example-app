@@ -5,7 +5,7 @@
       <label for="exampleInputEmail1">      {{ form.name }}</label>
     </div>
 
-    <img v-if="form.photo_url" :src="'/storage/'+form.photo_url" height="150px">
+    <img v-if="form.photo_url" :src="form.photo_url" height="150px">
     <div class="large-12 medium-12 small-12 cell">
       <label>Выбирите изображение
         <input type="file" id="file" ref="mainFileInput" v-on:change="handleFileMainUpload()"/>
@@ -26,12 +26,20 @@
 
 
     <label> Моя цель:
-      <span v-for="item in targets">
+      <ul class="nav md-pills pills-secondary">
+      <li  v-for="item in targets">
            <br>
            <input type="checkbox" :id="'targets'+item.id" :name="'targets'+item.id" :value="item.id" v-model="form.target_id" >
            <label :for="'targets'+item.id" >{{ item.name }}</label>
-         </span>
+         </li>
+      </ul>
     </label>
+
+    <div class="form-group">
+      <label> Обо мне:
+        <textarea v-model="form.description"></textarea>
+      </label>
+    </div>
 
     <div class="form-group">
       <label for="exampleInputPassword1">Пароль</label>

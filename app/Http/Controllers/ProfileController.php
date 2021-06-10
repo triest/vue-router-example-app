@@ -131,7 +131,7 @@ class ProfileController extends Controller
             $name = time().'_'.$user->id.'_'.rand(0,100).'_.'.$request->file->getClientOriginalExtension();
 
             $user->photo_name=$name;
-            $user->photo_url=$filePath;
+            $user->photo_url='/storage/'.$filePath;
             $user->save();
             return response()->json(['photo_url'=>$filePath]);
         }

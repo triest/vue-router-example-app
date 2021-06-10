@@ -2031,8 +2031,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Anket",
+  data: function data() {
+    return {
+      profile: null
+    };
+  },
   mounted: function mounted() {
     console.log("anket");
     console.log(this.$route.params.unique_id);
@@ -2043,7 +2060,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       this.axios.get("/api/anket/".concat(this.$route.params.unique_id)).then(function (res) {
-        _this.product = res.data;
+        _this.profile = res.data.data;
+        console.log(_this.profile);
+        console.log(_this.profile.targets);
       });
     }
   }
@@ -2105,6 +2124,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ErrorsModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ErrorsModal */ "./resources/js/components/ErrorsModal.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39473,7 +39500,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [
+    _vm.profile
+      ? _c(
+          "div",
+          { staticClass: "profile-header__vote js-profile-header-buttons" },
+          [
+            _vm._v("\n  " + _vm._s(_vm.profile.name) + "\n  "),
+            _vm.profile.relation_id
+              ? _c("div", [_vm._v(_vm._s(_vm.profile.relation))])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.profile.photo_url
+              ? _c("img", {
+                  attrs: { src: _vm.profile.photo_url, height: "150px" }
+                })
+              : _vm._e(),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Я хочу")]),
+            _vm._v(" "),
+            _vm._l(_vm.profile.targets, function(target) {
+              return _c("span", { staticClass: "label label-info" }, [
+                _vm._v(_vm._s(target.name) + "\n  ")
+              ])
+            })
+          ],
+          2
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39585,9 +39642,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _vm.form.photo_url
-        ? _c("img", {
-            attrs: { src: "/storage/" + _vm.form.photo_url, height: "150px" }
-          })
+        ? _c("img", { attrs: { src: _vm.form.photo_url, height: "150px" } })
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
@@ -39657,12 +39712,13 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "label",
-        [
-          _vm._v(" Моя цель:\n    "),
+      _c("label", [
+        _vm._v(" Моя цель:\n    "),
+        _c(
+          "ul",
+          { staticClass: "nav md-pills pills-secondary" },
           _vm._l(_vm.targets, function(item) {
-            return _c("span", [
+            return _c("li", [
               _c("br"),
               _vm._v(" "),
               _c("input", {
@@ -39715,10 +39771,35 @@ var render = function() {
                 _vm._v(_vm._s(item.name))
               ])
             ])
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", [
+          _vm._v(" Обо мне:\n      "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.description,
+                expression: "form.description"
+              }
+            ],
+            domProps: { value: _vm.form.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "description", $event.target.value)
+              }
+            }
           })
-        ],
-        2
-      ),
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "exampleInputPassword1" } }, [
@@ -40488,18 +40569,7 @@ var render = function() {
               [_c("anket-short-view", { attrs: { user: item } })],
               1
             )
-          }),
-          _vm._v(" "),
-          _vm.seachModal
-            ? _c("SearchModal", {
-                staticClass: "search-modal",
-                on: {
-                  closeSeachModal: function($event) {
-                    return _vm.closeSeachModal()
-                  }
-                }
-              })
-            : _vm._e()
+          })
         ],
         2
       ),

@@ -17,7 +17,8 @@ class AnketController extends Controller
      */
     public function show($unique_id)
     {
-        $user=User::select(['*'])->where('unique_id',$unique_id)->first();
+        $user=User::select(['*'])->where('unique_id',$unique_id)->with('relation','target')->first();
+   //     $user=User::select(['*'])->where('unique_id',$unique_id)->first();
 
         $authUser=Auth::user();
 
