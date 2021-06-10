@@ -21,7 +21,7 @@
         <div class="col md-1 sm-3" v-for="item in anketList">
           <anket-short-view :user="item"></anket-short-view>
         </div>
-        <SearchModal class="search-modal" v-if="seachModal" @closeSeachModal="closeSeachModal()"></SearchModal>
+    <!--    <SearchModal class="search-modal" v-if="seachModal" @closeSeachModal="closeSeachModal()"></SearchModal>-->
       </div>
       <span style="width: 70px; display: inline-block">
       <button id="next2" v-if="prev_page_url!=null" class="btn btn-primar" v-on:click="seach(prev_page_url)">
