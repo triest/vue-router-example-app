@@ -1892,7 +1892,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.$store.dispatch('GET_SETTINGS');
-    this.$store.dispatch('SAVE_SETTINGS');
+    console.log(this.example());
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)('SAVE_SETTINGS')), {}, {
     example: function example() {
@@ -1903,10 +1903,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(this.getSettings['user_id']); //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
 
       this.getSettings = {
-        'color': 'green'
-      };
-      this.getSettings = {
-        'id': 3
+        'color': 'trf'
       };
       this.getSettings = {
         'user_id': 2
@@ -2130,8 +2127,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _ErrorsModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ErrorsModal */ "./resources/js/components/ErrorsModal.vue");
-//
-//
 //
 //
 //
@@ -2807,6 +2802,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__.default({
   mode: 'history',
   routes: _routes__WEBPACK_IMPORTED_MODULE_5__.routes
 });
+var DEFAULT_TITLE = 'Some Default Title';
+router.afterEach(function (to, from) {
+  // Use next tick to handle router history correctly
+  // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+  vue__WEBPACK_IMPORTED_MODULE_0__.default.nextTick(function () {
+    document.title = to.meta.title || DEFAULT_TITLE;
+  });
+});
 var app = new vue__WEBPACK_IMPORTED_MODULE_0__.default({
   el: '#app',
   store: _store_index__WEBPACK_IMPORTED_MODULE_7__.store,
@@ -2894,31 +2897,52 @@ vue__WEBPACK_IMPORTED_MODULE_7__.default.component('app', __webpack_require__(/*
 var routes = [{
   name: 'home',
   path: '/',
-  component: _components_AllProduct_vue__WEBPACK_IMPORTED_MODULE_0__.default
+  component: _components_AllProduct_vue__WEBPACK_IMPORTED_MODULE_0__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'create',
   path: '/create',
-  component: _components_CreateProduct_vue__WEBPACK_IMPORTED_MODULE_1__.default
+  component: _components_CreateProduct_vue__WEBPACK_IMPORTED_MODULE_1__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'edit',
   path: '/edit/:id',
-  component: _components_EditProduct_vue__WEBPACK_IMPORTED_MODULE_2__.default
+  component: _components_EditProduct_vue__WEBPACK_IMPORTED_MODULE_2__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'register',
   path: '/register',
-  component: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_3__.default
+  component: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_3__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'profile',
   path: '/profile',
-  component: _components_Auth_Profile__WEBPACK_IMPORTED_MODULE_4__.default
+  component: _components_Auth_Profile__WEBPACK_IMPORTED_MODULE_4__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'dating',
   path: '/dating',
-  component: _components_dating_Dating__WEBPACK_IMPORTED_MODULE_5__.default
+  component: _components_dating_Dating__WEBPACK_IMPORTED_MODULE_5__.default,
+  meta: {
+    title: 'About'
+  }
 }, {
   name: 'anket',
   path: '/anket/:unique_id',
-  component: _components_Anket__WEBPACK_IMPORTED_MODULE_6__.default
+  component: _components_Anket__WEBPACK_IMPORTED_MODULE_6__.default,
+  meta: {
+    title: 'About'
+  }
 }];
 
 /***/ }),
@@ -39726,13 +39750,12 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("label", [
-        _vm._v(" Моя цель:\n    "),
-        _c(
-          "ul",
-          { staticClass: "nav md-pills pills-secondary" },
+      _c(
+        "label",
+        [
+          _vm._v(" Моя цель:\n    "),
           _vm._l(_vm.targets, function(item) {
-            return _c("li", [
+            return _c("span", [
               _c("br"),
               _vm._v(" "),
               _c("input", {
@@ -39785,10 +39808,10 @@ var render = function() {
                 _vm._v(_vm._s(item.name))
               ])
             ])
-          }),
-          0
-        )
-      ]),
+          })
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", [

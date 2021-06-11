@@ -14,36 +14,45 @@ export const routes = [
     {
         name: 'home',
         path: '/',
-        component: AllProduct
+        component: AllProduct,
+     meta: { title: 'About' }
     },
     {
         name: 'create',
         path: '/create',
-        component: CreateProduct
+        component: CreateProduct,
+        meta: { title: 'About' }
     },
     {
         name: 'edit',
         path: '/edit/:id',
-        component: EditProduct
+        component: EditProduct,
+        meta: { title: 'About' }
     },
     {
         name:'register',
         path: '/register',
-        component: Register
+        component: Register,
+        meta: { title: 'About' }
     },
     {
         name:'profile',
         path: '/profile',
-        component: Profile
+        component: Profile,
+        meta: { title: 'About' }
     },
     {
         name:'dating',
         path: '/dating',
-        component: Dating
+        component: Dating,
+        meta: { title: 'About' }
     },
     {
         name: 'anket',
         path: '/anket/:unique_id',
-        component: Anket
+        component: Anket,
+        meta: { title: 'About' }
     }
 ];
+
+

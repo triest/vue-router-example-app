@@ -26,13 +26,11 @@
 
 
     <label> Моя цель:
-      <ul class="nav md-pills pills-secondary">
-      <li  v-for="item in targets">
+      <span  v-for="item in targets">
            <br>
            <input type="checkbox" :id="'targets'+item.id" :name="'targets'+item.id" :value="item.id" v-model="form.target_id" >
            <label :for="'targets'+item.id" >{{ item.name }}</label>
-         </li>
-      </ul>
+         </span>
     </label>
 
     <div class="form-group">

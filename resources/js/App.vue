@@ -41,7 +41,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch('GET_SETTINGS')
-        this.$store.dispatch('SAVE_SETTINGS')
+        console.log(this.example())
     },
 
     methods: {
@@ -55,8 +55,7 @@ export default {
             console.log(this.getSettings['user_id']);
 
         //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
-            this.getSettings={ 'color': 'green'}
-            this.getSettings={ 'id': 3}
+            this.getSettings={ 'color': 'trf'}
             this.getSettings={ 'user_id': 2}
 
 

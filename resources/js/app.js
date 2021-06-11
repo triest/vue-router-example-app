@@ -34,6 +34,16 @@ const router = new VueRouter({
     routes: routes
 });
 
+const DEFAULT_TITLE = 'Some Default Title';
+
+router.afterEach((to, from) => {
+    // Use next tick to handle router history correctly
+    // see: https://github.com/vuejs/vue-router/issues/914#issuecomment-384477609
+    Vue.nextTick(() => {
+        document.title = to.meta.title || DEFAULT_TITLE;
+    });
+});
+
 const app = new Vue({
     el: '#app',
     store: store,
