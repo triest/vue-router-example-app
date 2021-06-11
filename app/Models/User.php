@@ -56,7 +56,7 @@ class User extends Authenticatable
     public function interest()
     {
         return $this->belongsToMany(
-                Interest::class
+                Interest::class,'user_interest'
         );
     }
 

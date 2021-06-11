@@ -7,8 +7,14 @@
     <hr>
     <h2>Я хочу</h2>
 
-    <span class="label label-info"  v-for="target in profile.targets">{{ target.name }}
+    <span class="label label-info"  v-for="item in profile.targets">{{ item.name }}
     </span>
+
+    <h2>Интересы</h2>
+
+    <span class="label label-info"  v-for="item in profile.interest">{{ item.name }}
+    </span>
+
 
   </div>
   </div>

@@ -27,7 +27,8 @@ class AnketResource extends JsonResource
                 'photo_url' => $this->photo_url,
                 'relation_id' => $this->relation_id,
                 'relation' => $relation_name,
-                'targets'=>$this->target
+                'targets'=>$this->target,
+                'interest'=>$this->interest,
         ];
     }
 }

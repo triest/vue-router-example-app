@@ -2043,6 +2043,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Anket",
   data: function data() {
@@ -39521,9 +39527,17 @@ var render = function() {
             _vm._v(" "),
             _c("h2", [_vm._v("Я хочу")]),
             _vm._v(" "),
-            _vm._l(_vm.profile.targets, function(target) {
+            _vm._l(_vm.profile.targets, function(item) {
               return _c("span", { staticClass: "label label-info" }, [
-                _vm._v(_vm._s(target.name) + "\n  ")
+                _vm._v(_vm._s(item.name) + "\n  ")
+              ])
+            }),
+            _vm._v(" "),
+            _c("h2", [_vm._v("Интересы")]),
+            _vm._v(" "),
+            _vm._l(_vm.profile.interest, function(item) {
+              return _c("span", { staticClass: "label label-info" }, [
+                _vm._v(_vm._s(item.name) + "\n  ")
               ])
             })
           ],
