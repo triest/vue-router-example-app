@@ -97,7 +97,8 @@ export default {
             axios.post('/api/profile', this.form).then(() => {
                 //    this.$router.push({name: 'home'})
                 this.form = res.data.data;
-                alert("Сохранено")
+                Alert("Сохранено");
+                console.log('alert')
             }).catch((error) => {
                 if (error.response !== undefined && error.response.status === 422) {
                     this.errors = error.response.data.errors;

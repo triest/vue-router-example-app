@@ -10,6 +10,6 @@ class Target extends Model
     use HasFactory;
 
     public function user(){
-        return $this->belongsToMany(Target::class)->withTimestamps();
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }

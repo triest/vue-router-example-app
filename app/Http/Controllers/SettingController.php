@@ -48,7 +48,6 @@ class SettingController extends Controller
         $settings=$user->settings()->firstOrNew();
 
         foreach ($request->post() as $key=>$value){
-       //     dump($value);
             $settings->$key=$value;
         }
         $settings->save();

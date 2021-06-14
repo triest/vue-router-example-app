@@ -55,9 +55,7 @@ class User extends Authenticatable
 
     public function interest()
     {
-        return $this->belongsToMany(
-                Interest::class,'user_interest'
-        );
+        return $this->belongsToMany(Interest::class,'user_interest')->withTimestamps();
     }
 
     public function sex(){

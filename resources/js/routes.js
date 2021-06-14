@@ -15,43 +15,43 @@ export const routes = [
         name: 'home',
         path: '/',
         component: AllProduct,
-     meta: { title: 'About' }
+        meta: {title: 'Главная'}
     },
     {
         name: 'create',
         path: '/create',
         component: CreateProduct,
-        meta: { title: 'About' }
+        meta: {title: 'About'}
     },
     {
         name: 'edit',
         path: '/edit/:id',
         component: EditProduct,
-        meta: { title: 'About' }
+        meta: {title: 'About'}
     },
     {
-        name:'register',
+        name: 'register',
         path: '/register',
         component: Register,
-        meta: { title: 'About' }
+        meta: {title: 'Регистрация'}
     },
     {
-        name:'profile',
+        name: 'profile',
         path: '/profile',
         component: Profile,
-        meta: { title: 'About' }
+        meta: {title: 'Моя анкета'}
     },
     {
-        name:'dating',
+        name: 'dating',
         path: '/dating',
         component: Dating,
-        meta: { title: 'About' }
+        meta: {title: 'Знакомства'}
     },
     {
         name: 'anket',
         path: '/anket/:unique_id',
         component: Anket,
-        meta: { title: 'About' }
+        meta: {title: 'About'}
     }
 ];
 

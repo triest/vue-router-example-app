@@ -55,7 +55,7 @@ export default {
             console.log(this.getSettings['user_id']);
 
         //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
-            this.getSettings={ 'color': 'trf'}
+            this.getSettings={ 'color': 'red'}
             this.getSettings={ 'user_id': 2}
 
 

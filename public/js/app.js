@@ -1903,7 +1903,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       console.log(this.getSettings['user_id']); //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
 
       this.getSettings = {
-        'color': 'trf'
+        'color': 'red'
       };
       this.getSettings = {
         'user_id': 2
@@ -2224,7 +2224,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/profile', this.form).then(function () {
         //    this.$router.push({name: 'home'})
         _this2.form = res.data.data;
-        alert("Сохранено");
+        Alert("Сохранено");
+        console.log('alert');
       })["catch"](function (error) {
         if (error.response !== undefined && error.response.status === 422) {
           _this2.errors = error.response.data.errors;
@@ -2899,7 +2900,7 @@ var routes = [{
   path: '/',
   component: _components_AllProduct_vue__WEBPACK_IMPORTED_MODULE_0__.default,
   meta: {
-    title: 'About'
+    title: 'Главная'
   }
 }, {
   name: 'create',
@@ -2920,21 +2921,21 @@ var routes = [{
   path: '/register',
   component: _components_Auth_Register_vue__WEBPACK_IMPORTED_MODULE_3__.default,
   meta: {
-    title: 'About'
+    title: 'Регистрация'
   }
 }, {
   name: 'profile',
   path: '/profile',
   component: _components_Auth_Profile__WEBPACK_IMPORTED_MODULE_4__.default,
   meta: {
-    title: 'About'
+    title: 'Моя анкета'
   }
 }, {
   name: 'dating',
   path: '/dating',
   component: _components_dating_Dating__WEBPACK_IMPORTED_MODULE_5__.default,
   meta: {
-    title: 'About'
+    title: 'Знакомства'
   }
 }, {
   name: 'anket',
