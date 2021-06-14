@@ -2198,6 +2198,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -2214,6 +2264,11 @@ __webpack_require__.r(__webpack_exports__);
       },
       relations: [],
       targets: [],
+      children: [],
+      alcohol: [],
+      smoking: [],
+      bodyType: [],
+      interest: [],
       errors: null
     };
   },
@@ -2228,6 +2283,17 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < res.data.data.profile.target.length; i++) {
         _this.form.target_id.push(res.data.data.profile.target[i].id);
+      }
+
+      _this.alcohol = res.data.data.alcohol;
+      _this.children = res.data.data.children;
+      _this.smoking = res.data.data.smoking;
+      _this.bodyType = res.data.data.body_type;
+      _this.interest = res.data.data.interest;
+      _this.form.interest_id = [];
+
+      for (var _i = 0; _i < res.data.data.profile.interest.length; _i++) {
+        _this.form.interest_id.push(res.data.data.profile.interest[_i].id);
       }
     });
   },
@@ -39862,68 +39928,295 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c(
-        "label",
-        [
-          _vm._v(" Моя цель:\n    "),
-          _vm._l(_vm.targets, function(item) {
-            return _c("span", [
-              _c("br"),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.target_id,
-                    expression: "form.target_id"
-                  }
-                ],
-                attrs: {
-                  type: "checkbox",
-                  id: "targets" + item.id,
-                  name: "targets" + item.id
-                },
-                domProps: {
-                  value: item.id,
-                  checked: Array.isArray(_vm.form.target_id)
-                    ? _vm._i(_vm.form.target_id, item.id) > -1
-                    : _vm.form.target_id
-                },
-                on: {
-                  change: function($event) {
-                    var $$a = _vm.form.target_id,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = item.id,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.form, "target_id", $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.form,
-                            "target_id",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
-                      }
-                    } else {
-                      _vm.$set(_vm.form, "target_id", $$c)
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v("Дети:\n      "),
+            _vm._l(_vm.children, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.children_id,
+                      expression: "form.children_id"
+                    }
+                  ],
+                  attrs: { type: "radio", id: "children" },
+                  domProps: {
+                    value: item.id,
+                    checked: _vm._q(_vm.form.children_id, item.id)
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "children_id", item.id)
                     }
                   }
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "targets" + item.id } }, [
-                _vm._v(_vm._s(item.name))
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "relation" } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
               ])
-            ])
-          })
-        ],
-        2
-      ),
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v("Отеношение к алкоголю:\n      "),
+            _vm._l(_vm.alcohol, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.alcohol_id,
+                      expression: "form.alcohol_id"
+                    }
+                  ],
+                  attrs: { type: "radio", id: "alcohol" },
+                  domProps: {
+                    value: item.id,
+                    checked: _vm._q(_vm.form.alcohol_id, item.id)
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "alcohol_id", item.id)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "relation" } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v("Отеношение к курению:\n      "),
+            _vm._l(_vm.smoking, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.smoking_id,
+                      expression: "form.smoking_id"
+                    }
+                  ],
+                  attrs: { type: "radio", id: "smoking" },
+                  domProps: {
+                    value: item.id,
+                    checked: _vm._q(_vm.form.smoking_id, item.id)
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "smoking_id", item.id)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "relation" } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v("Телосложение:\n      "),
+            _vm._l(_vm.bodyType, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.body_type_id,
+                      expression: "form.body_type_id"
+                    }
+                  ],
+                  attrs: { type: "radio", id: "body_type_id" },
+                  domProps: {
+                    value: item.id,
+                    checked: _vm._q(_vm.form.body_type_id, item.id)
+                  },
+                  on: {
+                    change: function($event) {
+                      return _vm.$set(_vm.form, "body_type_id", item.id)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "relation" } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v(" Моя цель:\n    "),
+            _vm._l(_vm.targets, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.target_id,
+                      expression: "form.target_id"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    id: "targets" + item.id,
+                    name: "targets" + item.id
+                  },
+                  domProps: {
+                    value: item.id,
+                    checked: Array.isArray(_vm.form.target_id)
+                      ? _vm._i(_vm.form.target_id, item.id) > -1
+                      : _vm.form.target_id
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.target_id,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = item.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "target_id", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "target_id",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "target_id", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "targets" + item.id } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+        _c(
+          "label",
+          [
+            _vm._v(" Мои интересы:\n      "),
+            _vm._l(_vm.interest, function(item) {
+              return _c("span", [
+                _c("br"),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.interest_id,
+                      expression: "form.interest_id"
+                    }
+                  ],
+                  attrs: {
+                    type: "checkbox",
+                    id: "interest" + item.id,
+                    name: "interest" + item.id
+                  },
+                  domProps: {
+                    value: item.id,
+                    checked: Array.isArray(_vm.form.interest_id)
+                      ? _vm._i(_vm.form.interest_id, item.id) > -1
+                      : _vm.form.interest_id
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.form.interest_id,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = item.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.form, "interest_id", $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.form,
+                              "interest_id",
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.form, "interest_id", $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("label", { attrs: { for: "interest" + item.id } }, [
+                  _vm._v(_vm._s(item.name))
+                ])
+              ])
+            })
+          ],
+          2
+        )
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group" }, [
         _c("label", [

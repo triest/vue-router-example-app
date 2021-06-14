@@ -23,8 +23,47 @@
       </label>
     </div>
 
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Дети:
+        <span v-for="item in children">
+           <br>
+           <input type="radio" id="children" :value="item.id" v-model="form.children_id">
+           <label for="relation">{{ item.name }}</label>
+         </span>
+      </label>
+    </div>
 
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Отеношение к алкоголю:
+        <span v-for="item in alcohol">
+           <br>
+           <input type="radio" id="alcohol" :value="item.id" v-model="form.alcohol_id">
+           <label for="relation">{{ item.name }}</label>
+         </span>
+      </label>
+    </div>
 
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Отеношение к курению:
+        <span v-for="item in smoking">
+           <br>
+           <input type="radio" id="smoking" :value="item.id" v-model="form.smoking_id">
+           <label for="relation">{{ item.name }}</label>
+         </span>
+      </label>
+    </div>
+
+    <div class="large-12 medium-12 small-12 cell">
+      <label>Телосложение:
+        <span v-for="item in bodyType">
+           <br>
+           <input type="radio" id="body_type_id" :value="item.id" v-model="form.body_type_id">
+           <label for="relation">{{ item.name }}</label>
+         </span>
+      </label>
+    </div>
+
+    <div class="large-12 medium-12 small-12 cell">
     <label> Моя цель:
       <span  v-for="item in targets">
            <br>
@@ -32,6 +71,17 @@
            <label :for="'targets'+item.id" >{{ item.name }}</label>
          </span>
     </label>
+    </div>
+    <div class="large-12 medium-12 small-12 cell">
+      <label> Мои интересы:
+        <span  v-for="item in interest">
+           <br>
+           <input type="checkbox" :id="'interest'+item.id" :name="'interest'+item.id" :value="item.id" v-model="form.interest_id" >
+           <label :for="'interest'+item.id" >{{ item.name }}</label>
+         </span>
+      </label>
+    </div>
+
 
     <div class="form-group">
       <label> Обо мне:
@@ -72,7 +122,12 @@ export default {
             },
             relations: [],
             targets:[],
-            errors: null
+            children:[],
+            alcohol:[],
+            smoking:[],
+            bodyType:[],
+            interest: [],
+            errors: null,
         }
     },
     created() {
@@ -86,6 +141,16 @@ export default {
                 for (let i=0;i<res.data.data.profile.target.length;i++){
                       this.form.target_id.push(res.data.data.profile.target[i].id)
                 }
+                this.alcohol=res.data.data.alcohol;
+                this.children=res.data.data.children;
+                this.smoking=res.data.data.smoking;
+                this.bodyType=res.data.data.body_type;
+                this.interest=res.data.data.interest;
+                this.form.interest_id=[]
+                for (let i=0;i<res.data.data.profile.interest.length;i++){
+                    this.form.interest_id.push(res.data.data.profile.interest[i].id)
+                }
+
 
             });
     },

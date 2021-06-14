@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PhotoRequest;
 use App\Http\Requests\ProfileRequest;
 use App\Http\Resources\ProfileResource;
+use App\Models\Interest;
 use App\Models\Target;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class ProfileController extends Controller
     {
         //
         $user=Auth::user();
-        $user=User::select(['*'])->with('target')->where('id',$user->id)->first();
+        $user=User::select(['*'])->with('target','interest')->where('id',$user->id)->first();
 
 
         return new ProfileResource($user);
@@ -56,6 +57,19 @@ class ProfileController extends Controller
                         ->first();
                 if ($target != null) {
                     $user->target()->attach($target);
+                }
+            }
+        }
+
+
+
+        $user->interest()->detach();
+        if ($request->has('interest_id')) {
+            foreach ($request->interest_id as $item) {
+                $target = Interest::select(['id', 'name'])->where('id', $item)
+                        ->first();
+                if ($target != null) {
+                    $user->interest()->attach($target);
                 }
             }
         }
