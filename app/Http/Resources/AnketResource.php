@@ -27,8 +27,12 @@ class AnketResource extends JsonResource
                 'photo_url' => $this->photo_url,
                 'relation_id' => $this->relation_id,
                 'relation' => $relation_name,
-                'targets'=>$this->target,
-                'interest'=>$this->interest,
+                'targets' => $this->target,
+                'interest' => $this->interest,
+                'smoking' => isset($this->smoking->name) ? $this->smoking->name : null,
+                'alcohol' => isset($this->alcohol->name) ? $this->alcohol->name : null,
+                'children' => isset($this->children->name) ? $this->children->name : null,
+                'body_type' => isset($this->bodyType->name) ? $this->bodyType->name : null,
         ];
     }
 }

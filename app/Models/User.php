@@ -59,8 +59,25 @@ class User extends Authenticatable
     }
 
     public function sex(){
-        return $this->hasOne(Sex::class);
+        return $this->belongsTo(Sex::class);
     }
+
+    public function alcohol(){
+        return $this->belongsTo(Alcohole::class);
+    }
+
+    public function bodyType(){
+        return $this->belongsTo(BodyType::class);
+    }
+
+    public function children(){
+        return $this->belongsTo(Children::class);
+    }
+
+    public function smoking(){
+        return $this->belongsTo(Smoking::class);
+    }
+
 
 
     public function seachsettings()

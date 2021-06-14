@@ -35,6 +35,10 @@ class UserFactory extends Factory
                 'photo_name' => $this->faker->word,
                 'photo_url' => "https://via.placeholder.com/300/09f/fff.pngC/O%20https://placeholder.com/",
                 'relation_id' => rand(1,3),
+                'children_id'=>rand(1,3),
+                 'alcohol_id'=>rand(1,3),
+                'smoking_id'=>rand(1,4),
+                'body_type_id'=>rand(1,4)
         ];
     }
 }
