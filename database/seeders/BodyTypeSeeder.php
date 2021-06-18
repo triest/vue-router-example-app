@@ -16,7 +16,7 @@ class BodyTypeSeeder extends Seeder
     public function run()
     {
         //
-        $arr=['Нормальное','Худощивое','Плотное','Спортивное'];
+        $arr=['Нормальное','Худощавое','Полное','Спортивное'];
         foreach ($arr as $item){
             $relation=new BodyType();
             $relation->name=$item;
