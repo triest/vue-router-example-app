@@ -1,9 +1,9 @@
 <template>
   <div class="container">
     <ul>
-      <li>    <router-link :to="{name: 'profile'}" >Профиль</router-link></li>
+      <li><router-link :to="{name: 'profile'}" >Профиль</router-link></li>
       <li> <router-link :to="{name: 'dating'}" >Знакомства</router-link></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><router-link :to="{name: 'chat'}">Сообщения</router-link></li>
       <li><a href="#about">About</a></li>
     </ul>
     <button class="btn btn-primary" v-on:click="example()">Example</button>

@@ -6,6 +6,7 @@ import Vue from 'vue'
 import Profile from "./components/Auth/Profile";
 import Dating from "./components/dating/Dating";
 import Anket from "./components/Anket"
+import ChatApp from "./components/chat/ChatApp";
 
 Vue.component('app', require('./App.vue').default);
 
@@ -52,6 +53,12 @@ export const routes = [
         path: '/anket/:unique_id',
         component: Anket,
         meta: {title: 'About'}
+    },
+    {
+        name: 'chat',
+        path: '/chat',
+        component: ChatApp,
+        meta: {title: 'Чат'}
     }
 ];
 
