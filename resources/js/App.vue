@@ -38,27 +38,18 @@ export default {
                   this.$store.dispatch('SAVE_SETTINGS',newValue)
               }
           },
+
     },
     mounted() {
         this.$store.dispatch('GET_SETTINGS')
-        console.log(this.example())
+        this.example()
     },
 
     methods: {
         ...mapActions('SAVE_SETTINGS'),
+
         example(){
             console.log("example");
-         //   console.log(this.getSettings);
-
-            console.log(this.getSettings['id']);
-            console.log(this.getSettings['color']);
-            console.log(this.getSettings['user_id']);
-
-        //    this.$store.commit('set_settings',{key: 'color', value: 'gren'});
-            this.getSettings={ 'color': 'red'}
-            this.getSettings={ 'user_id': 2}
-
-
 
         },
         logout() {

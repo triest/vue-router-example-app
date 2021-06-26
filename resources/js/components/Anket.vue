@@ -1,9 +1,13 @@
 <template>
   <div>
-    <div class="container">
+    <div v-if="profile" class="container">
       <div id="flex-container">
         <div class="raw-item" id="raw"> <img v-if="profile.photo_url" :src="profile.photo_url" height="150px"></div>
-        <div class="flex-item" id="flex">{{profile.name}},{{profile.age}}</div>
+        <div class="flex-item" id="flex">{{profile.name}},{{profile.age}}
+        <br>
+          <button class="btn btn-primary"  v-on:click="showMessage" @closeNewMessageAlert="showNewMessageModal=false">Отправить сообщение</button>
+
+        </div>
       </div>
       <hr>
       <h2>Я хочу</h2>
@@ -33,16 +37,25 @@
         Телосложение: {{profile.body_type}}
       </div>
     </div>
+    <new-message-modal v-if="showNewMessageModal" :user="profile"  @close="showNewMessageModal=null"></new-message-modal>
+
   </div>
 </template>
 
 <script>
+import newMessageModal from "./chat/newMessageModal";
+import ErrorsModal from "./ErrorsModal";
 export default {
     name: "Anket",
     data() {
         return {
             profile: null,
+            showNewMessageModal:false
         }
+    },
+    components:{
+        newMessageModal,
+        ErrorsModal
     },
     mounted() {
         console.log("anket")
@@ -58,6 +71,10 @@ export default {
                     document.title = this.profile.name;
 
                 });
+        },
+        showMessage(){
+            this.showNewMessageModal=true;
+            console.log("showMessage"+this.showNewMessageModal)
         }
     }
 }

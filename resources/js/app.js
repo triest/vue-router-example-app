@@ -19,6 +19,7 @@ import { routes } from './routes';
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('new-message-modal',require('./components/chat/newMessageModal').default)
 
 
 Vue.use(VueRouter);

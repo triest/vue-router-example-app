@@ -19,46 +19,50 @@
 <script>
     import Conversation from './Conversation';
     import ContactsList from './ContactsList';
+    import {mapActions} from "vuex";
 
     export default {
         props: {
-            user: {
-                type: Object,
-                required: true
-            },
             target_user:{
                 type: Object,
                 required: false,
                 default:null,
             }
         },
+        computed : {
+        /*    user: {
+                get: function () {
+                    let user=this.$store.getters.get_user
+                    return user
+                },
+                set:function (newValue){
+                    this.$store.dispatch('SAVE_USER',newValue)
+                }
+            },
+*/
+        },
         data() {
             return {
                 selectedContact: null,
                 messages: [],
                 contacts: [],
-                unreaded: 0
+                unreaded: 0,
+                user:null
             };
         },
         mounted() {
-
-            Echo.private(`user.${this.user.id}`)
-                .listen('NewMessage', (e) => {
-                    console.log("new message");
-                    this.hanleIncoming(e.message);
-             //     eventHub.$on('scroll_to_down', true)
-                    this.getContacts()
-                });
-            this.getContacts()
-
-
-            if(this.target_user!=null){
-                this.startConversationWith(this.target_user,null)
-            }
+          this.getUser();
+          this.getContacts();
         },
         methods: {
+            getUser(){
+                axios.get('/api/user')
+                    .then((response) => {
+                        this.user = response.data;
+                    });
+            },
             getContacts(){
-              axios.get('api/contact/contacts')
+              axios.get('/api/contact/')
                   .then((response) => {
                     this.contacts = response.data;
                   });
@@ -67,7 +71,7 @@
                 console.log("start conversation");
                 //     this.updateUnreadCount(contact, true);
 
-                axios.get(`api/contact/conversation/${contact.id}`)
+                axios.get(`/api/contact/conversation/${contact.id}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;

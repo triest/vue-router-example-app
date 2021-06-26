@@ -30,7 +30,7 @@
             }
 
 
-            $diologs=$user->dialogs()->with('other')->orderBy('lastMessage','asc')->get();
+            $diologs=$user->dialog()->with('other')->with('massages')->get();
 
             return $diologs;
         }

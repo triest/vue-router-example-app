@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        dump(Auth::user());
+        $user=Auth::user();
 
-       return response()->json();
+       return response()->json(['user'=>$user->only(['id','name','age'])],200);
     }
 
     /**

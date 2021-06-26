@@ -18,6 +18,8 @@ class SettingController extends Controller
     {
         $user=Auth::user();
 
+
+
        $settings=$user->settings()->first();
 
         return response()->json(['settings'=>$settings],200);

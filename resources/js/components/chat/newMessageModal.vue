@@ -1,147 +1,206 @@
 <template>
-    <div class="newMessageModal">
-        <transition name="modal" @close="showModal = false">
-            <div class="modal-mask">
-                <div class="modal-wrapper">
-                    <div class="modal-container">
+  <div>
+    <transition name="modal" @close="showModal = false">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
 
-                        <div class="modal-header">
-                            <slot name="header">
-                                ddd
-                            </slot>
-                        </div>
-
-                        <div class="modal-body">
-                            <slot name="body">
-
-                            </slot>
-                        </div>
-
-                        <div class="modal-footer">
-                            <slot name="footer">
-                                <button class="modal-default-button" v-on:click="close()">
-                                    �������
-                                </button>
-                            </slot>
-                        </div>
-                    </div>
-
-                </div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" v-on:click="$emit('close')">&times;</button>
+              </div>
+              <div class="modal-body">
+                <textarea v-model="MessageText" placeholder="Введите сообщение!"></textarea>
+              </div>
+              <div class="modal-footer">
+                <a class="btn btn-primary" v-on:click="send()">Отправить</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="$emit('close')">Close</button>
+              </div>
             </div>
-        </transition>
-    </div>
+
+          </div>
+        </div>
+      </div>
+    </transition>
+  </div>
 </template>
 
 <script>
-    export default {
-        props: {},
-        name: 'modal',
-        mounted() {
-
+export default {
+    name: 'modal',
+    props: {
+        errors: {
+            type: Object,
+            required: false,
+            default: null,
         },
-        data() {
-            return {
-                MessageText: ""
-            }
-        },
-        methods: {
-            close() {
-                this.$emit('closeNewMessageAlert')
-            },
-            findUserByid() {
+        user:{
+            type: Object,
+            required: true
+        }
 
-            },
-            saveChange() {
+    },
+    mounted() {
+        if (this.present != null) {
+            this.name = this.present.name;
+            this.price = this.present.price;
+            this.enable=this.present.enabled;
+            //    this.emit(this.present.enabled)
+        }
+    },
+    /* считаем выделенные*/
 
-                axios.post('api/conversation/send', {
-                    contact_id: this.id,
-                    text: this.MessageText
-                }).then((response) => {
-                    this.MessageText = "";
-                    this.$emit('close');
-                    this.close();
-                });
-                this.$emit('close');
-                this.close();
-            }
+    data() {
+        return {
+            MessageText: "",
+            message: "",
+            modalShow: true
+        }
+    },
+    methods: {
+        close() {
+            this.$emit('closePresentModal')
         },
-    };
+        findUserByid() {
+        },
+        send() {
+            console.log("send")
+            axios.post('/api/contact/conversation/send', {
+                contact_id: this.user.unique_id,
+                text: this.MessageText
+            }).then((response) => {
+                this.MessageText = "";
+                document.getElementById('close').click();
+                //    $('#staticBackdrop').modal('hide');
+            }).catch(err => {
+                if (err.response.status === 500 || err.response.status === 400 || err.response.status===404) {
+                   Alert("Внутренняя ошибка")
+                }
+            });
+        }
+    },
+};
 </script>
 
 <style>
-    textarea {
-        width: 90%; /* ������ ���� � ��������� */
-        height: 200px; /* ������ ���� � �������� */
-        resize: none; /* ��������� �������� ������ */
+textarea {
+    width: 90%; /* Ширина поля в процентах */
+    height: 200px; /* Высота поля в пикселах */
+    resize: none; /* Запрещаем изменять размер */
+}
+.file {
+    display: block !important;
+}
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    display: table;
+    transition: opacity .3s ease;
+}
+.modal-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+.modal-container {
+    width: 600px;
+    margin: 0px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
+}
+.modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
+}
+.modal-body {
+    margin: 20px 0;
+}
+.modal-default-button {
+    float: right;
+}
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+.modal-enter {
+    opacity: 0;
+}
+.modal-leave-active {
+    opacity: 0;
+}
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.newMessageModal {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    max-width: 100px !important;
+}
+input.apple-switch {
+    position: relative;
+    appearance: none;
+    outline: none;
+    width: 50px;
+    height: 30px;
+    background-color: #ffffff;
+    border: 1px solid #D9DADC;
+    border-radius: 50px;
+    box-shadow: inset -20px 0 0 0 #ffffff;
+    transition-duration: 200ms;
+}
+input.apple-switch:after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 26px;
+    height: 13px;
+    background-color: transparent;
+    border-radius: 50%;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+}
+input.apple-switch:checked {
+    border-color: #4ED164;
+    box-shadow: inset 20px 0 0 0 #4ED164;
+}
+input.apple-switch:checked:after {
+    left: 20px;
+    box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);
+}
+.bounce-enter-active {
+    animation: bounce-in .5s;
+}
+.bounce-leave-active {
+    animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+    0% {
+        transform: scale(0);
     }
-
-    .modal-mask {
-        position: fixed;
-        z-index: 9998;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, .5);
-        display: table;
-        transition: opacity .3s ease;
+    50% {
+        transform: scale(1.5);
     }
-
-    .modal-wrapper {
-        display: table-cell;
-        vertical-align: middle;
+    100% {
+        transform: scale(1);
     }
-
-    .modal-container {
-        width: 600px;
-        margin: 0px auto;
-        padding: 20px 30px;
-        background-color: #fff;
-        border-radius: 2px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-        transition: all .3s ease;
-        font-family: Helvetica, Arial, sans-serif;
-    }
-
-    .modal-header h3 {
-        margin-top: 0;
-        color: #42b983;
-    }
-
-    .modal-body {
-        margin: 20px 0;
-    }
-
-    .modal-default-button {
-        float: right;
-    }
-
-    /*
-     * The following styles are auto-applied to elements with
-     * transition="modal" when their visibility is toggled
-     * by Vue.js.
-     *
-     * You can easily play with the modal transition by editing
-     * these styles.
-     */
-
-    .modal-enter {
-        opacity: 0;
-    }
-
-    .modal-leave-active {
-        opacity: 0;
-    }
-
-    .modal-enter .modal-container,
-    .modal-leave-active .modal-container {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
-
-    .newMessageModal {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-    }
+}
+.v-fade {
+    transition: all 4s ease-out;
+}
 </style>
