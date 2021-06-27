@@ -10,6 +10,7 @@
 
 
 
+    use App\Models\Message;
     use App\Models\User;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\DB;
@@ -30,7 +31,7 @@
             }
 
 
-            $diologs=$user->dialog()->with('other')->with('massages')->get();
+            $diologs=$user->dialog()->with('other')->get();
 
             return $diologs;
         }

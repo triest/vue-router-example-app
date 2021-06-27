@@ -2865,9 +2865,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     contacts: {
@@ -3153,6 +3150,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _ErrorsModal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ErrorsModal */ "./resources/js/components/ErrorsModal.vue");
 //
 //
 //
@@ -3180,8 +3178,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: 'modal',
+  components: {
+    ErrorsModal: _ErrorsModal__WEBPACK_IMPORTED_MODULE_0__.default
+  },
   props: {
     errors: {
       type: Object,
@@ -3217,17 +3221,24 @@ __webpack_require__.r(__webpack_exports__);
     send: function send() {
       var _this = this;
 
-      console.log("send");
       axios.post('/api/contact/conversation/send', {
         contact_id: this.user.unique_id,
         text: this.MessageText
       }).then(function (response) {
         _this.MessageText = "";
         document.getElementById('close').click(); //    $('#staticBackdrop').modal('hide');
+
+        _this.$emit('close');
       })["catch"](function (err) {
-        if (err.response.status === 500 || err.response.status === 400 || err.response.status === 404) {
+        if (err.status === 500 || err.status === 400 || err.status === 404) {
           Alert("Внутренняя ошибка");
         }
+
+        if (err.status !== undefined && err.status === 422) {
+          _this.errors = err.response.data.errors;
+        }
+
+        _this.$emit('close');
       });
     }
   }
@@ -8265,7 +8276,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\ntextarea {\n    width: 90%; /* Ширина поля в процентах */\n    height: 200px; /* Высота поля в пикселах */\n    resize: none; /* Запрещаем изменять размер */\n}\n.file {\n    display: block !important;\n}\n.modal-mask {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    transition: opacity .3s ease;\n}\n.modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container {\n    width: 600px;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body {\n    margin: 20px 0;\n}\n.modal-default-button {\n    float: right;\n}\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter {\n    opacity: 0;\n}\n.modal-leave-active {\n    opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n    transform: scale(1.1);\n}\n.newMessageModal {\n    position: fixed;\n    bottom: 0;\n    right: 0;\n    z-index: 999;\n    max-width: 100px !important;\n}\ninput.apple-switch {\n    position: relative;\n    -webkit-appearance: none;\n       -moz-appearance: none;\n            appearance: none;\n    outline: none;\n    width: 50px;\n    height: 30px;\n    background-color: #ffffff;\n    border: 1px solid #D9DADC;\n    border-radius: 50px;\n    box-shadow: inset -20px 0 0 0 #ffffff;\n    transition-duration: 200ms;\n}\ninput.apple-switch:after {\n    content: \"\";\n    position: absolute;\n    top: 1px;\n    left: 1px;\n    width: 26px;\n    height: 13px;\n    background-color: transparent;\n    border-radius: 50%;\n    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);\n}\ninput.apple-switch:checked {\n    border-color: #4ED164;\n    box-shadow: inset 20px 0 0 0 #4ED164;\n}\ninput.apple-switch:checked:after {\n    left: 20px;\n    box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);\n}\n.bounce-enter-active {\n    -webkit-animation: bounce-in .5s;\n            animation: bounce-in .5s;\n}\n.bounce-leave-active {\n    animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n        transform: scale(0);\n}\n50% {\n        transform: scale(1.5);\n}\n100% {\n        transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n        transform: scale(0);\n}\n50% {\n        transform: scale(1.5);\n}\n100% {\n        transform: scale(1);\n}\n}\n.v-fade {\n    transition: all 4s ease-out;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\ntextarea {\n    width: 90%; /* Ширина поля в процентах */\n    height: 200px; /* Высота поля в пикселах */\n    resize: none; /* Запрещаем изменять размер */\n}\n.file {\n    display: block !important;\n}\n.modal-mask {\n    position: fixed;\n    z-index: 9998;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, .5);\n    display: table;\n    transition: opacity .3s ease;\n}\n.modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-container {\n    width: 600px;\n    margin: 0px auto;\n    padding: 20px 30px;\n    background-color: #fff;\n    border-radius: 2px;\n    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n    transition: all .3s ease;\n    font-family: Helvetica, Arial, sans-serif;\n}\n.modal-header h3 {\n    margin-top: 0;\n    color: #42b983;\n}\n.modal-body {\n    margin: 20px 0;\n}\n.modal-default-button {\n    float: right;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter {\n    opacity: 0;\n}\n.modal-leave-active {\n    opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n    transform: scale(1.1);\n}\n.newMessageModal {\n    position: fixed;\n    bottom: 0;\n    right: 0;\n    z-index: 999;\n    max-width: 100px !important;\n}\ninput.apple-switch {\n    position: relative;\n    -webkit-appearance: none;\n       -moz-appearance: none;\n            appearance: none;\n    outline: none;\n    width: 50px;\n    height: 30px;\n    background-color: #ffffff;\n    border: 1px solid #D9DADC;\n    border-radius: 50px;\n    box-shadow: inset -20px 0 0 0 #ffffff;\n    transition-duration: 200ms;\n}\ninput.apple-switch:after {\n    content: \"\";\n    position: absolute;\n    top: 1px;\n    left: 1px;\n    width: 26px;\n    height: 13px;\n    background-color: transparent;\n    border-radius: 50%;\n    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);\n}\ninput.apple-switch:checked {\n    border-color: #4ED164;\n    box-shadow: inset 20px 0 0 0 #4ED164;\n}\ninput.apple-switch:checked:after {\n    left: 20px;\n    box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);\n}\n.bounce-enter-active {\n    -webkit-animation: bounce-in .5s;\n            animation: bounce-in .5s;\n}\n.bounce-leave-active {\n    animation: bounce-in .5s reverse;\n}\n@-webkit-keyframes bounce-in {\n0% {\n        transform: scale(0);\n}\n50% {\n        transform: scale(1.5);\n}\n100% {\n        transform: scale(1);\n}\n}\n@keyframes bounce-in {\n0% {\n        transform: scale(0);\n}\n50% {\n        transform: scale(1.5);\n}\n100% {\n        transform: scale(1);\n}\n}\n.v-fade {\n    transition: all 4s ease-out;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -48828,73 +48839,65 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "messages-box" }, [
-    _vm.sortedContacts.length > 0
-      ? _c(
-          "div",
-          { staticClass: "list-group rounded-0" },
-          _vm._l(_vm.sortedContacts, function(contact) {
-            return _c(
-              "a",
-              {
-                key: contact.id,
-                staticClass:
-                  "list-group-item list-group-item-action text-white rounded-0",
-                class: _vm.colorContact(contact.other.id) ? "active" : "",
-                on: {
-                  click: function($event) {
-                    return _vm.selectContact(contact)
-                  }
-                }
-              },
-              [
-                _c("div", { staticClass: "media" }, [
-                  _c("img", {
-                    staticClass: "rounded-circle",
-                    attrs: {
-                      src: contact.other.photo_profile_url,
-                      width: "50",
-                      height: "50"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "media-body ml-4" }, [
+    _c(
+      "div",
+      { staticClass: "list-group rounded-0" },
+      _vm._l(_vm.sortedContacts, function(contact) {
+        return _c(
+          "a",
+          {
+            key: contact.id,
+            staticClass:
+              "list-group-item list-group-item-action text-white rounded-0",
+            class: _vm.colorContact(contact.uuid) ? "active" : "",
+            on: {
+              click: function($event) {
+                return _vm.selectContact(contact)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "media" }, [
+              _c("img", {
+                staticClass: "rounded-circle",
+                attrs: { src: contact.photo, width: "50", height: "50" }
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "media-body ml-4" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "d-flex align-items-center justify-content-between mb-1"
+                  },
+                  [
                     _c(
-                      "div",
+                      "h6",
                       {
-                        staticClass:
-                          "d-flex align-items-center justify-content-between mb-1"
+                        class: _vm.colorContact(contact.uuid)
+                          ? "text-white"
+                          : "text-muted"
                       },
-                      [
-                        _c(
-                          "h6",
-                          {
-                            class: _vm.colorContact(contact.other.id)
-                              ? "text-white"
-                              : "text-muted"
-                          },
-                          [_vm._v(_vm._s(contact.other.name))]
-                        ),
-                        _c(
-                          "small",
-                          {
-                            class: _vm.colorContact(contact.other.id)
-                              ? "text-white"
-                              : "text-muted"
-                          },
-                          [_vm._v(_vm._s(contact.date))]
-                        )
-                      ]
+                      [_vm._v(_vm._s(contact.other_name))]
+                    ),
+                    _c(
+                      "small",
+                      {
+                        class: _vm.colorContact(contact.other.id)
+                          ? "text-white"
+                          : "text-muted"
+                      },
+                      [_vm._v(_vm._s(contact.date))]
                     )
-                  ])
-                ])
-              ]
-            )
-          }),
-          0
+                  ]
+                )
+              ])
+            ])
+          ]
         )
-      : _c("div", { staticClass: "list-group rounded-0" }, [
-          _vm._v("\n    Нет контактов\n\n  ")
-        ])
+      }),
+      0
+    )
   ])
 }
 var staticRenderFns = []
@@ -49170,6 +49173,17 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm.errors
+        ? _c("errors-modal", {
+            attrs: { errors: _vm.errors },
+            on: {
+              close: function($event) {
+                _vm.errors = null
+              }
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "transition",
         {
@@ -49249,7 +49263,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Close")]
+                      [_vm._v("Close\n              ")]
                     )
                   ])
                 ])

@@ -103,7 +103,7 @@ class User extends Authenticatable
     }
 
     public function dialog(){
-        return $this->hasMany(Dialog::class);
+        return $this->hasMany(Dialog::class,'my_id','id');
     }
 
     public function sendMessage($text, $who_user = null)

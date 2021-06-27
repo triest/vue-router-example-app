@@ -1,5 +1,6 @@
 <template>
   <div>
+    <errors-modal v-if="errors" :errors="errors" @close="errors=null"></errors-modal>
     <transition name="modal" @close="showModal = false">
       <div class="modal-mask">
         <div class="modal-wrapper">
@@ -14,7 +15,8 @@
               </div>
               <div class="modal-footer">
                 <a class="btn btn-primary" v-on:click="send()">Отправить</a>
-                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="$emit('close')">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" v-on:click="$emit('close')">Close
+                </button>
               </div>
             </div>
 
@@ -26,15 +28,21 @@
 </template>
 
 <script>
+import ErrorsModal from "../ErrorsModal";
+
+
 export default {
     name: 'modal',
+    components: {
+        ErrorsModal
+    },
     props: {
         errors: {
             type: Object,
             required: false,
             default: null,
         },
-        user:{
+        user: {
             type: Object,
             required: true
         }
@@ -44,7 +52,7 @@ export default {
         if (this.present != null) {
             this.name = this.present.name;
             this.price = this.present.price;
-            this.enable=this.present.enabled;
+            this.enable = this.present.enabled;
             //    this.emit(this.present.enabled)
         }
     },
@@ -64,7 +72,6 @@ export default {
         findUserByid() {
         },
         send() {
-            console.log("send")
             axios.post('/api/contact/conversation/send', {
                 contact_id: this.user.unique_id,
                 text: this.MessageText
@@ -72,13 +79,18 @@ export default {
                 this.MessageText = "";
                 document.getElementById('close').click();
                 //    $('#staticBackdrop').modal('hide');
+                this.$emit('close')
             }).catch(err => {
-                if (err.response.status === 500 || err.response.status === 400 || err.response.status===404) {
-                   Alert("Внутренняя ошибка")
+                if (err.status === 500 || err.status === 400 || err.status === 404) {
+                    Alert("Внутренняя ошибка")
                 }
-            });
+                if (err.status !== undefined && err.status === 422) {
+                    this.errors = err.response.data.errors;
+                }
+                this.$emit('close')
+            })
         }
-    },
+    }
 };
 </script>
 
@@ -88,9 +100,11 @@ textarea {
     height: 200px; /* Высота поля в пикселах */
     resize: none; /* Запрещаем изменять размер */
 }
+
 .file {
     display: block !important;
 }
+
 .modal-mask {
     position: fixed;
     z-index: 9998;
@@ -102,10 +116,12 @@ textarea {
     display: table;
     transition: opacity .3s ease;
 }
+
 .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
 }
+
 .modal-container {
     width: 600px;
     margin: 0px auto;
@@ -116,16 +132,20 @@ textarea {
     transition: all .3s ease;
     font-family: Helvetica, Arial, sans-serif;
 }
+
 .modal-header h3 {
     margin-top: 0;
     color: #42b983;
 }
+
 .modal-body {
     margin: 20px 0;
 }
+
 .modal-default-button {
     float: right;
 }
+
 /*
  * The following styles are auto-applied to elements with
  * transition="modal" when their visibility is toggled
@@ -137,14 +157,17 @@ textarea {
 .modal-enter {
     opacity: 0;
 }
+
 .modal-leave-active {
     opacity: 0;
 }
+
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
 }
+
 .newMessageModal {
     position: fixed;
     bottom: 0;
@@ -152,6 +175,7 @@ textarea {
     z-index: 999;
     max-width: 100px !important;
 }
+
 input.apple-switch {
     position: relative;
     appearance: none;
@@ -164,6 +188,7 @@ input.apple-switch {
     box-shadow: inset -20px 0 0 0 #ffffff;
     transition-duration: 200ms;
 }
+
 input.apple-switch:after {
     content: "";
     position: absolute;
@@ -175,20 +200,25 @@ input.apple-switch:after {
     border-radius: 50%;
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
 }
+
 input.apple-switch:checked {
     border-color: #4ED164;
     box-shadow: inset 20px 0 0 0 #4ED164;
 }
+
 input.apple-switch:checked:after {
     left: 20px;
     box-shadow: -2px 4px 3px rgba(0, 0, 0, 0.05);
 }
+
 .bounce-enter-active {
     animation: bounce-in .5s;
 }
+
 .bounce-leave-active {
     animation: bounce-in .5s reverse;
 }
+
 @keyframes bounce-in {
     0% {
         transform: scale(0);
@@ -200,6 +230,7 @@ input.apple-switch:checked:after {
         transform: scale(1);
     }
 }
+
 .v-fade {
     transition: all 4s ease-out;
 }
