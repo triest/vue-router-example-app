@@ -5,7 +5,7 @@
       <span v-for="message in messages">
       <!-- Sender Message-->
 
-      <div v-if="message.to == contact.id" class="media w-50 mb-3"><img :src="contact.photo_profile_url" alt="user" width="50" class="rounded-circle">
+      <div v-if="message.to === contact.uuid" class="media w-50 mb-3"><img :src="contact.photo" width="50" class="rounded-circle">{{contact.other_name}}
         <div class="media-body ml-3">
           <div class="bg-light rounded py-2 px-3 mb-2">
             <p class="text-small mb-0 text-muted">{{message.text}}</p>
@@ -16,7 +16,7 @@
 
       <!-- Reciever Message-->
 
-      <div v-if="message.to != contact.id" class="media w-50 ml-auto mb-3">
+      <div v-if="message.from === contact.uuid" class="media w-50 ml-auto mb-3">
         <div class="media-body">
           <div class="bg-primary rounded py-2 px-3 mb-2">
             <p class="text-small mb-0 text-white">{{message.text}}</p>
@@ -60,6 +60,8 @@
         },
          mounted() {
            this.scrollDown();
+           console.log("conversation")
+           console.log(this.contact)
         },
 
       watch: {
@@ -86,11 +88,12 @@
                     return;
                 }
 
-                axios.post('api/contact/conversation/send', {
-                    contact_id: this.contact.id,
+
+                axios.post('/api/contact/conversation/send', {
+                    contact_id: this.contact,
                     text: text
                 }).then((response) => {
-                    this.$emit('new', response.data);
+                    this.$emit('new', this.contact);
                 })
             }
         },

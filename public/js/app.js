@@ -2795,18 +2795,17 @@ __webpack_require__.r(__webpack_exports__);
     startConversationWith: function startConversationWith(contact, image) {
       var _this3 = this;
 
-      console.log("start conversation"); //     this.updateUnreadCount(contact, true);
-
-      axios.get("/api/contact/conversation/".concat(contact.id)).then(function (response) {
+      axios.get("/api/contact/conversation/".concat(contact.uuid)).then(function (response) {
         _this3.messages = response.data;
         _this3.selectedContact = contact;
       });
     },
     saveNewMessage: function saveNewMessage(message) {
-      this.messages.push(message); //   this.getContacts();
+      // this.messages.push(message);
+      this.startConversationWith(message, null); //   this.getContacts();
     },
     hanleIncoming: function hanleIncoming(message) {
-      if (this.selectedContact && message.to === this.selectedContact.id) {
+      if (this.selectedContact && message.to === this.selectedContact.uuid) {
         this.saveNewMessage(message);
         return;
       }
@@ -2890,13 +2889,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectContact: function selectContact(contact) {
-      this.selected = contact.other;
-      this.selectedContactId = contact.id;
-      this.$emit('selected', contact.other);
-      document.title = contact.other.name;
+      this.selected = contact.uuid;
+      this.selectedContactId = contact.uuid;
+      this.$emit('selected', contact);
+      document.title = contact.name;
     },
     colorContact: function colorContact(id) {
-      if (id === this.selectedContactId || this.target_user != null && id === this.target_user.id) {
+      if (id === this.selectedContactId || this.target_user != null && id === this.target_user.uuid) {
         return true;
       } else {
         return false;
@@ -2990,6 +2989,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.scrollDown();
+    console.log("conversation");
+    console.log(this.contact);
   },
   watch: {
     messages: function messages(val) {
@@ -3014,11 +3015,11 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
-      axios.post('api/contact/conversation/send', {
-        contact_id: this.contact.id,
+      axios.post('/api/contact/conversation/send', {
+        contact_id: this.contact,
         text: text
       }).then(function (response) {
-        _this.$emit('new', response.data);
+        _this.$emit('new', _this.contact);
       });
     }
   },
@@ -48846,7 +48847,7 @@ var render = function() {
         return _c(
           "a",
           {
-            key: contact.id,
+            key: contact.uuid,
             staticClass:
               "list-group-item list-group-item-action text-white rounded-0",
             class: _vm.colorContact(contact.uuid) ? "active" : "",
@@ -48883,7 +48884,7 @@ var render = function() {
                     _c(
                       "small",
                       {
-                        class: _vm.colorContact(contact.other.id)
+                        class: _vm.colorContact(contact.uuid)
                           ? "text-white"
                           : "text-muted"
                       },
@@ -48934,17 +48935,13 @@ var render = function() {
         },
         _vm._l(_vm.messages, function(message) {
           return _c("span", [
-            message.to == _vm.contact.id
+            message.to === _vm.contact.uuid
               ? _c("div", { staticClass: "media w-50 mb-3" }, [
                   _c("img", {
                     staticClass: "rounded-circle",
-                    attrs: {
-                      src: _vm.contact.photo_profile_url,
-                      alt: "user",
-                      width: "50"
-                    }
+                    attrs: { src: _vm.contact.photo, width: "50" }
                   }),
-                  _vm._v(" "),
+                  _vm._v(_vm._s(_vm.contact.other_name) + "\n      "),
                   _c("div", { staticClass: "media-body ml-3" }, [
                     _c(
                       "div",
@@ -48963,7 +48960,7 @@ var render = function() {
                 ])
               : _vm._e(),
             _vm._v(" "),
-            message.to != _vm.contact.id
+            message.from === _vm.contact.uuid
               ? _c("div", { staticClass: "media w-50 ml-auto mb-3" }, [
                   _c("div", { staticClass: "media-body" }, [
                     _c(

@@ -68,10 +68,7 @@
                   });
             },
             startConversationWith(contact, image) {
-                console.log("start conversation");
-                //     this.updateUnreadCount(contact, true);
-
-                axios.get(`/api/contact/conversation/${contact.id}`)
+                axios.get(`/api/contact/conversation/${contact.uuid}`)
                     .then((response) => {
                         this.messages = response.data;
                         this.selectedContact = contact;
@@ -79,12 +76,13 @@
 
             },
             saveNewMessage(message) {
-                this.messages.push(message);
+               // this.messages.push(message);
+                this.startConversationWith(message,null)
 
              //   this.getContacts();
             },
             hanleIncoming(message) {
-                if (this.selectedContact && message.to === this.selectedContact.id) {
+                if (this.selectedContact && message.to === this.selectedContact.uuid) {
                     this.saveNewMessage(message);
                     return;
                 }
